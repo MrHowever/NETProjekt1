@@ -24,8 +24,8 @@ namespace Lab01
     {
         ObservableCollection<Person> people = new ObservableCollection<Person>
         {
-            new Person { Name = "Jan", Age = 25, Img = "C:\\Users\\Waldemar\\Desktop\\Platormy Programistyczne .NET i JAVA\\NETProjekt1\\Lab01\\Images\\Man2.jpeg" },
-            new Person { Name = "Agata", Age = 23, Img = "C:\\Users\\Waldemar\\Desktop\\Platormy Programistyczne .NET i JAVA\\NETProjekt1\\Lab01\\Images\\Lady1.jpeg"}
+            new Person { Name = "Jan", Surname = "Kowalski", Img = "C:\\Users\\Waldemar\\Desktop\\Platormy Programistyczne .NET i JAVA\\NETProjekt1\\Lab01\\Images\\Man2.jpeg" },
+            new Person { Name = "Agata", Surname = "Nowak", Img = "C:\\Users\\Waldemar\\Desktop\\Platormy Programistyczne .NET i JAVA\\NETProjekt1\\Lab01\\Images\\Lady1.jpeg"}
         };
 
         public ObservableCollection<Person> Items
@@ -41,7 +41,7 @@ namespace Lab01
         
         private void AddNewPersonButton_Click(object sender, RoutedEventArgs e)
         {
-            people.Add(new Person { Age = int.Parse(ageTextBox.Text), Name = nameTextBox.Text, Img = Path.Text});
+            people.Add(new Person {Surname = ageTextBox.Text, Name = nameTextBox.Text, Img = Path.Text});
         }
 
         private void BtnImg_Click(object sender, RoutedEventArgs e)

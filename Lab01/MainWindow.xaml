@@ -15,9 +15,9 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Path=Name}" Width="100"/>
-                        <TextBlock Text="{Binding Path=Age}" Width="100"/>
-                        <Image Source="{Binding Path=Img}" Width="50" Height="100"/>
+                        <TextBlock Name="GetNameTxt" Text="{Binding Path=Name}" Width="100" Padding="0,0,5,15"/>
+                        <TextBlock Name ="GetSurnameTxt" Text="{Binding Path=Surname}" Width="100" Padding="0,0,5,15" />
+                        <Image Name ="GetImgSrc" Source="{Binding Path=Img}" Height="80"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -25,13 +25,13 @@
         <StackPanel Grid.Column="1" Margin="20" Orientation="Vertical">
             <TextBlock TextWrapping="Wrap" Text="Name" Margin="0,0,-0.2,0"/>
             <TextBox x:Name ="nameTextBox" Height="23" TextWrapping="Wrap" Text="Jarosław" Margin="0,0,-0.2,10"/>
-            <TextBlock TextWrapping="Wrap" Text="Age" Margin="0,0,-0.2,0"/>
-            <TextBox x:Name="ageTextBox" Height="23" TextWrapping="Wrap" Text="99"  Margin="0,0,-0.2,10"/>
-            <Button x:Name="btnImg" Content="Search your image..." Margin="0,0,-0.2,0" Click="BtnImg_Click"/>
-            <Image x:Name="ImgPerson" Source="C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\profile.jpeg" Height="180" Margin="110,0" Stretch="Uniform" Width="135"/>
+            <TextBlock TextWrapping="Wrap" Text="Surname" Margin="0,0,-0.2,0"/>
+            <TextBox x:Name="ageTextBox" Height="23" TextWrapping="Wrap" Text="Mazur"  Margin="0,0,-0.2,10"/>
+            <Button x:Name="btnImg" Content="Search your image..." Margin="91,0,91,10" Click="BtnImg_Click" ClickMode="Press"/>
+            <Image x:Name="ImgPerson" Source="C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\nonprofile.png" Height="180" Margin="110,0" Stretch="Uniform" Width="135"/>
             <TextBlock TextWrapping="Wrap" Text="Picture:"/>
-            <TextBox x:Name="Path" Height="40" TextWrapping="Wrap" Text=""/>
-            <Button x:Name = "addNewPersonButton" Content="Add new person" Click="AddNewPersonButton_Click" Margin="211,0,26.8,0"/>
+            <TextBox x:Name="Path" TextWrapping="Wrap"/>
+            <Button x:Name = "addNewPersonButton" Content="Add new person" Click="AddNewPersonButton_Click" Margin="211,0,-0.2,0"/>
         </StackPanel>
     </Grid>
 </Window>

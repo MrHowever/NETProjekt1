@@ -10,7 +10,7 @@ namespace Lab01
     public class Person
     {
         public string Name { get; set; }
-        public int Age { get; set; }
+        public string Surname { get; set; }
         public string Img { get; set; }
     }
 }
