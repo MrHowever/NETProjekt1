@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab01"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Profiles" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -15,16 +15,16 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Name="GetNameTxt" Text="{Binding Path=Name}" Width="100" Padding="0,0,5,15"/>
-                        <TextBlock Name ="GetSurnameTxt" Text="{Binding Path=Surname}" Width="100" Padding="0,0,5,15" />
-                        <Image Name ="GetImgSrc" Source="{Binding Path=Img}" Height="80"/>
+                        <TextBlock Text="{Binding Path=Name}" Width="100" Padding="0,0,5,15"/>
+                        <TextBlock Text="{Binding Path=Surname}" Width="100" Padding="0,0,5,15" />
+                        <Image Source="{Binding Path=Img}" Height="80"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Column="1" Margin="20" Orientation="Vertical">
             <TextBlock TextWrapping="Wrap" Text="Name" Margin="0,0,-0.2,0"/>
-            <TextBox x:Name ="nameTextBox" Height="23" TextWrapping="Wrap" Text="Jarosław" Margin="0,0,-0.2,10"/>
+            <TextBox x:Name ="nameTextBox" Height="23" TextWrapping="Wrap" Text="Mariusz" Margin="0,0,-0.2,10"/>
             <TextBlock TextWrapping="Wrap" Text="Surname" Margin="0,0,-0.2,0"/>
             <TextBox x:Name="ageTextBox" Height="23" TextWrapping="Wrap" Text="Mazur"  Margin="0,0,-0.2,10"/>
             <Button x:Name="btnImg" Content="Search your image..." Margin="91,0,91,10" Click="BtnImg_Click" ClickMode="Press"/>

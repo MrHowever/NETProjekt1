@@ -55,7 +55,7 @@ namespace Lab01
                 Path.Text = openFile.FileName; 
             }
         }
-
+   
    
     }
 }
