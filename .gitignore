@@ -1,0 +1,6 @@
+
+*.lock
+*.ide
+Lab01/.vs/Lab01/v15/Server/sqlite3/storage.ide-wal
+Lab01/.vs/Lab01/v15/.suo
+*.ide-shm

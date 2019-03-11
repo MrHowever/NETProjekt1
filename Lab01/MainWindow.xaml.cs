@@ -42,6 +42,8 @@ namespace Lab01
         private void AddNewPersonButton_Click(object sender, RoutedEventArgs e)
         {
             people.Add(new Person {Surname = ageTextBox.Text, Name = nameTextBox.Text, Img = Path.Text});
+            Path.Text = "";
+            ImgPerson.Source = new BitmapImage(new Uri("C:\\Users\\Waldemar\\Desktop\\Platormy Programistyczne .NET i JAVA\\NETProjekt1\\Lab01\\Images\\nonprofile.png"));
         }
 
         private void BtnImg_Click(object sender, RoutedEventArgs e)
@@ -52,7 +54,7 @@ namespace Lab01
             if(openFile.ShowDialog()==true)
             {
                 ImgPerson.Source = new BitmapImage(new Uri(openFile.FileName));
-                Path.Text = openFile.FileName; 
+                Path.Text = openFile.FileName;
             }
         }
    
