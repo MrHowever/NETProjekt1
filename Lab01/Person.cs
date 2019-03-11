@@ -11,5 +11,6 @@ namespace Lab01
     {
         public string Name { get; set; }
         public int Age { get; set; }
+        public string Img { get; set; }
     }
 }

@@ -24,8 +24,8 @@ namespace Lab01
     {
         ObservableCollection<Person> people = new ObservableCollection<Person>
         {
-            new Person { Name = "P1", Age = 1 },
-            new Person { Name = "P2", Age = 2 }
+            new Person { Name = "Jan", Age = 25, Img = "C:\\Users\\Waldemar\\Desktop\\Platormy Programistyczne .NET i JAVA\\NETProjekt1\\Lab01\\Images\\Man2.jpeg" },
+            new Person { Name = "Agata", Age = 23, Img = "C:\\Users\\Waldemar\\Desktop\\Platormy Programistyczne .NET i JAVA\\NETProjekt1\\Lab01\\Images\\Lady1.jpeg"}
         };
 
         public ObservableCollection<Person> Items
@@ -41,7 +41,7 @@ namespace Lab01
         
         private void AddNewPersonButton_Click(object sender, RoutedEventArgs e)
         {
-            people.Add(new Person { Age = int.Parse(ageTextBox.Text), Name = nameTextBox.Text });
+            people.Add(new Person { Age = int.Parse(ageTextBox.Text), Name = nameTextBox.Text, Img = Path.Text});
         }
 
         private void BtnImg_Click(object sender, RoutedEventArgs e)
@@ -51,7 +51,8 @@ namespace Lab01
             openFile.Filter = "All files|*.jpg;*.jpeg;*.png|" + "JPEG (*.jpg;*.jpeg)|*jpg;*jpeg|" + "Portable Network Graphic (*.png)|*.png";
             if(openFile.ShowDialog()==true)
             {
-                ImgPerson.Source = new BitmapImage(new Uri(openFile.FileName));     
+                ImgPerson.Source = new BitmapImage(new Uri(openFile.FileName));
+                Path.Text = openFile.FileName; 
             }
         }
 
