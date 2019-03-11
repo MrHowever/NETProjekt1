@@ -11,13 +11,12 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListBox Margin="20,20,9.8,20" ItemsSource="{Binding Items}">
+        <ListBox Margin="20" ItemsSource="{Binding Items}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Path=Name}" Width="100"/>
                         <TextBlock Text="{Binding Path=Age}" Width="100"/>
-                      
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

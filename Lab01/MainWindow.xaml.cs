@@ -54,5 +54,7 @@ namespace Lab01
                 ImgPerson.Source = new BitmapImage(new Uri(openFile.FileName));     
             }
         }
+
+   
     }
 }
