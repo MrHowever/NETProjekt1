@@ -23,11 +23,12 @@ namespace Lab01
     public partial class MainWindow : Window
     {
         public int SelectedIndex = -1;
+        public static string NonProfileImg = "C:\\Users\\Waldemar\\Desktop\\Platormy Programistyczne .NET i JAVA\\NETProjekt1\\Lab01\\Images\\"; 
 
         ObservableCollection<Person> people = new ObservableCollection<Person>
         {
-            new Person { Name = "Jan", Surname = "Kowalski", Img = "E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\Man2.jpeg" },
-            new Person { Name = "Agata", Surname = "Nowak", Img = "E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\Lady1.jpeg"}
+            new Person { Name = "Jan", Surname = "Kowalski", Img = NonProfileImg + "Man2.jpeg" },
+            new Person { Name = "Agata", Surname = "Nowak", Img = NonProfileImg + "Lady1.jpeg"}
         };
 
         public ObservableCollection<Person> Items
@@ -39,9 +40,13 @@ namespace Lab01
         {
             InitializeComponent();
             DataContext = this;
+
             this.MinWidth = 750;
             this.MinHeight = 500;
-            ImgPerson.Source = new BitmapImage(new Uri("E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png"));
+
+
+            ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
+
         }
         
         private void AddNewPersonButton_Click(object sender, RoutedEventArgs e)
@@ -54,22 +59,36 @@ namespace Lab01
                 {
                     Surname = ageTextBox.Text,
                     Name = nameTextBox.Text,
-                    Img = path
+
+
+
+                    Img = Path.Text
+
                 };  
                 
                 addNewPersonButton.Content = "Add new person";
+                btnImg.Content = "Search your picture...";
                 SelectedIndex = -1;
+                Path.Text = "";
             }
             else
-            { 
+
+ { 
+
+
+
+            {
+                String path = Path.Text != "" ? Path.Text : NonProfileImg + "nonprofile.png";
                 people.Add(new Person { Surname = ageTextBox.Text, Name = nameTextBox.Text, Img = path });
-                ImgPerson.Source = new BitmapImage(new Uri("E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png"));
+                Path.Text = "";
+                ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
+
             }
 
             Path.Text = "";
             nameTextBox.Text = "";
             ageTextBox.Text = "";
-            ImgPerson.Source = new BitmapImage(new Uri("E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png"));
+            ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
         }
 
         private void BtnImg_Click(object sender, RoutedEventArgs e)
@@ -93,6 +112,7 @@ namespace Lab01
             Path.Text = selectedItem.Img;
             ImgPerson.Source = new BitmapImage(new Uri(selectedItem.Img));
             addNewPersonButton.Content = "Change";
+            btnImg.Content = "Change your picture...";
             SelectedIndex = listbox.SelectedIndex;
         }
     }
