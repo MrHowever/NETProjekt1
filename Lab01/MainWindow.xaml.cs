@@ -23,7 +23,7 @@ namespace Lab01
     public partial class MainWindow : Window
     {
         public int SelectedIndex = -1;
-        public static string NonProfileImg = "E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\"; 
+        public static string NonProfileImg = "C:\\Users\\Waldemar\\Desktop\\Platormy Programistyczne .NET i JAVA\\NETProjekt1\\Lab01\\Images\\"; 
 
         ObservableCollection<Person> people = new ObservableCollection<Person>
         {
