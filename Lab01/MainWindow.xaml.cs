@@ -51,11 +51,13 @@ namespace Lab01
                 {
                     Surname = ageTextBox.Text,
                     Name = nameTextBox.Text,
-                    Img = people[SelectedIndex].Img
+                    Img = Path.Text
                 };  
                 
                 addNewPersonButton.Content = "Add new person";
+                btnImg.Content = "Search your picture...";
                 SelectedIndex = -1;
+                Path.Text = "";
             }
             else
             {
@@ -91,6 +93,7 @@ namespace Lab01
             Path.Text = selectedItem.Img;
             ImgPerson.Source = new BitmapImage(new Uri(selectedItem.Img));
             addNewPersonButton.Content = "Change";
+            btnImg.Content = "Change your picture...";
             SelectedIndex = listbox.SelectedIndex;
         }
     }
