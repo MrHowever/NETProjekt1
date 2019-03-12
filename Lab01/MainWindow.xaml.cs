@@ -58,7 +58,8 @@ namespace Lab01
             }
             else
             {
-                people.Add(new Person { Surname = ageTextBox.Text, Name = nameTextBox.Text, Img = Path.Text });
+                String path = Path.Text != "" ? Path.Text : "E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png";
+                people.Add(new Person { Surname = ageTextBox.Text, Name = nameTextBox.Text, Img = path });
                 Path.Text = "";
                 ImgPerson.Source = new BitmapImage(new Uri("E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png"));
             }
