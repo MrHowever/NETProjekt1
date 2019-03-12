@@ -23,11 +23,12 @@ namespace Lab01
     public partial class MainWindow : Window
     {
         public int SelectedIndex = -1;
+        public static string NonProfileImg = "C:\\Users\\Waldemar\\Desktop\\Platormy Programistyczne .NET i JAVA\\NETProjekt1\\Lab01\\Images\\"; 
 
         ObservableCollection<Person> people = new ObservableCollection<Person>
         {
-            new Person { Name = "Jan", Surname = "Kowalski", Img = "E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\Man2.jpeg" },
-            new Person { Name = "Agata", Surname = "Nowak", Img = "E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\Lady1.jpeg"}
+            new Person { Name = "Jan", Surname = "Kowalski", Img = NonProfileImg + "Man2.jpeg" },
+            new Person { Name = "Agata", Surname = "Nowak", Img = NonProfileImg + "Lady1.jpeg"}
         };
 
         public ObservableCollection<Person> Items
@@ -39,7 +40,7 @@ namespace Lab01
         {
             InitializeComponent();
             DataContext = this;
-            ImgPerson.Source = new BitmapImage(new Uri("E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png"));
+            ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
         }
         
         private void AddNewPersonButton_Click(object sender, RoutedEventArgs e)
@@ -58,15 +59,15 @@ namespace Lab01
             }
             else
             {
-                String path = Path.Text != "" ? Path.Text : "E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png";
+                String path = Path.Text != "" ? Path.Text : NonProfileImg + "nonprofile.png";
                 people.Add(new Person { Surname = ageTextBox.Text, Name = nameTextBox.Text, Img = path });
                 Path.Text = "";
-                ImgPerson.Source = new BitmapImage(new Uri("E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png"));
+                ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
             }
 
             nameTextBox.Text = "";
             ageTextBox.Text = "";
-            ImgPerson.Source = new BitmapImage(new Uri("E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png"));
+            ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
         }
 
         private void BtnImg_Click(object sender, RoutedEventArgs e)
