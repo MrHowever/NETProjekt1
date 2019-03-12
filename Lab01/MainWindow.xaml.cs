@@ -39,31 +39,34 @@ namespace Lab01
         {
             InitializeComponent();
             DataContext = this;
+            this.MinWidth = 750;
+            this.MinHeight = 500;
             ImgPerson.Source = new BitmapImage(new Uri("E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png"));
         }
         
         private void AddNewPersonButton_Click(object sender, RoutedEventArgs e)
         {
+            String path = Path.Text != "" ? Path.Text : "E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png";
+
             if (SelectedIndex >= 0)
             {
                 people[SelectedIndex] = new Person
                 {
                     Surname = ageTextBox.Text,
                     Name = nameTextBox.Text,
-                    Img = people[SelectedIndex].Img
+                    Img = path
                 };  
                 
                 addNewPersonButton.Content = "Add new person";
                 SelectedIndex = -1;
             }
             else
-            {
-                String path = Path.Text != "" ? Path.Text : "E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png";
+            { 
                 people.Add(new Person { Surname = ageTextBox.Text, Name = nameTextBox.Text, Img = path });
-                Path.Text = "";
                 ImgPerson.Source = new BitmapImage(new Uri("E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png"));
             }
 
+            Path.Text = "";
             nameTextBox.Text = "";
             ageTextBox.Text = "";
             ImgPerson.Source = new BitmapImage(new Uri("E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png"));

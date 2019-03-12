@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab01"
         mc:Ignorable="d"
-        Title="Profiles" Height="450" Width="800">
+        Title="Profiles" Height="500" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -31,7 +31,7 @@
             <Image x:Name="ImgPerson" Source="C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\nonprofile.png" Height="180" Margin="110,0" Stretch="Uniform" Width="135"/>
             <TextBlock TextWrapping="Wrap" Text="Picture:"/>
             <TextBox x:Name="Path" TextWrapping="Wrap"/>
-            <Button x:Name = "addNewPersonButton" Content="Add new person" Click="AddNewPersonButton_Click" Margin="211,0,-0.2,0"/>
+            <Button x:Name = "addNewPersonButton" Content="Add new person" Click="AddNewPersonButton_Click" Margin="91,10,91,0"/>
         </StackPanel>
     </Grid>
 </Window>

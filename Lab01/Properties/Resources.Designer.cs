@@ -59,5 +59,24 @@ namespace Lab01.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu .
+        /// </summary>
+        internal static string DefaultThumbnail {
+            get {
+                return ResourceManager.GetString("DefaultThumbnail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap nonprofile {
+            get {
+                object obj = ResourceManager.GetObject("nonprofile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
