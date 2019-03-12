@@ -66,8 +66,9 @@ namespace Lab01
             Person selectedItem = (Person)listbox.SelectedItem;
             nameTextBox.Text = selectedItem.Name;
             ageTextBox.Text = selectedItem.Surname;
-            ImgPerson.Source = new BitmapImage(new Uri(selectedItem.Img));  
-                
+            ImgPerson.Source = new BitmapImage(new Uri(selectedItem.Img));
         }
+
+      
     }
 }
