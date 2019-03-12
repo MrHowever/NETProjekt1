@@ -57,7 +57,12 @@ namespace Lab01
                 Path.Text = openFile.FileName;
             }
         }
-   
-   
+
+        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListBox listbox = sender as ListBox;
+            nameTextBox.Text = listbox.SelectedItem.ToString();
+                
+        }
     }
 }

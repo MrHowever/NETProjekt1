@@ -11,8 +11,8 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListBox Margin="20" ItemsSource="{Binding Items}">
-            <ListBox.ItemTemplate>
+        <ListBox Margin="20" ItemsSource="{Binding Items}" MouseDoubleClick="ListBox_MouseDoubleClick">
+            <ListBox.ItemTemplate >
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Path=Name}" Width="100" Padding="0,0,5,15"/>
