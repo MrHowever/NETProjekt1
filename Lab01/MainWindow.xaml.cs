@@ -23,7 +23,7 @@ namespace Lab01
     public partial class MainWindow : Window
     {
         public int SelectedIndex = -1;
-        public static string NonProfileImg = "C:\\Users\\Waldemar\\Desktop\\Platormy Programistyczne .NET i JAVA\\NETProjekt1\\Lab01\\Images\\"; 
+        public static string NonProfileImg = "E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\"; 
 
         ObservableCollection<Person> people = new ObservableCollection<Person>
         {
@@ -51,7 +51,8 @@ namespace Lab01
         
         private void AddNewPersonButton_Click(object sender, RoutedEventArgs e)
         {
-            String path = Path.Text != "" ? Path.Text : "E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png";
+            //String path = Path.Text != "" ? Path.Text : "E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png";
+            String path = Path.Text != "" ? Path.Text : NonProfileImg + "nonprofile.png";
 
             if (SelectedIndex >= 0)
             {
@@ -59,30 +60,16 @@ namespace Lab01
                 {
                     Surname = ageTextBox.Text,
                     Name = nameTextBox.Text,
-
-
-
                     Img = Path.Text
-
                 };  
                 
                 addNewPersonButton.Content = "Add new person";
                 btnImg.Content = "Search your picture...";
                 SelectedIndex = -1;
-                Path.Text = "";
             }
             else
-
- { 
-
-
-
             {
-                String path = Path.Text != "" ? Path.Text : NonProfileImg + "nonprofile.png";
                 people.Add(new Person { Surname = ageTextBox.Text, Name = nameTextBox.Text, Img = path });
-                Path.Text = "";
-                ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
-
             }
 
             Path.Text = "";
