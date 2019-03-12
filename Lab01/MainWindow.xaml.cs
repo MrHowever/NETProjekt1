@@ -61,7 +61,10 @@ namespace Lab01
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ListBox listbox = sender as ListBox;
-            nameTextBox.Text = listbox.SelectedItem.ToString();
+            Person selectedItem = (Person)listbox.SelectedItem;
+            nameTextBox.Text = selectedItem.Name;
+            ageTextBox.Text = selectedItem.Surname;
+            ImgPerson.Source = new BitmapImage(new Uri(selectedItem.Img));  
                 
         }
     }
