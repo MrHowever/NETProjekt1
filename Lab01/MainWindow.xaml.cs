@@ -51,7 +51,7 @@ namespace Lab01
         
         private void AddNewPersonButton_Click(object sender, RoutedEventArgs e)
         {
-            //String path = Path.Text != "" ? Path.Text : "E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png";
+           
             String path = Path.Text != string.Empty ? Path.Text : NonProfileImg + "nonprofile.png";
 
             if (SelectedIndex >= 0)
