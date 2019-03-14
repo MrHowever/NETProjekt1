@@ -52,7 +52,7 @@ namespace Lab01
         private void AddNewPersonButton_Click(object sender, RoutedEventArgs e)
         {
             //String path = Path.Text != "" ? Path.Text : "E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\nonprofile.png";
-            String path = Path.Text != "" ? Path.Text : NonProfileImg + "nonprofile.png";
+            String path = Path.Text != string.Empty ? Path.Text : NonProfileImg + "nonprofile.png";
 
             if (SelectedIndex >= 0)
             {
@@ -72,9 +72,9 @@ namespace Lab01
                 people.Add(new Person { Surname = ageTextBox.Text, Name = nameTextBox.Text, Img = path });
             }
 
-            Path.Text = "";
-            nameTextBox.Text = "";
-            ageTextBox.Text = "";
+            Path.Text = string.Empty;
+            nameTextBox.Text = string.Empty;
+            ageTextBox.Text = string.Empty;
             ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
         }
 
