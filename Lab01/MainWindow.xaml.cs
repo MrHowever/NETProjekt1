@@ -117,16 +117,14 @@ namespace Lab01
 
             do
             {
-                System.Diagnostics.Debug.Write("\n\nUri: " + wiki + keyword+"\n");
                 request = (HttpWebRequest)WebRequest.Create(wiki + keyword);
                 request.AllowAutoRedirect = true;
                 request.Timeout = 10000;
                 response = (HttpWebResponse)request.GetResponse();
                 String responseUri = response.ResponseUri.ToString();
                 response.Close();
-                System.Diagnostics.Debug.Write("\n\nRandomizedUri: " + responseUri + "\n");
-                String[] parts = responseUri.Split('/');
 
+                String[] parts = responseUri.Split('/');
                 compare = Regex.Match(parts.Last(), @"Category:.+");
 
                 if (compare.Success)
