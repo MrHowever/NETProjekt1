@@ -47,7 +47,7 @@ namespace Lab01
             this.MinWidth = 750;
             this.MinHeight = 500;
 
-            GetImageWiki();
+            GetImageFromPage(GetImageWiki());
 
             ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
 
@@ -110,7 +110,7 @@ namespace Lab01
         private String GetImageWiki()
         {
             String wiki = "https://en.wikipedia.org/wiki/Special:RandomInCategory/";
-            String keyword = "People";
+            String keyword = "20th-century_Chancellors_of_Germany";
             Match compare;
             HttpWebRequest request;
             HttpWebResponse response;
@@ -140,7 +140,39 @@ namespace Lab01
             } while (compare.Success);
 
            String result = "https://en.wikipedia.org/wiki/" + keyword;
+            System.Diagnostics.Debug.Write("\n" + result + "\n");
             return result;
+        }
+
+        String GetImageFromPage(String url)
+        {
+            HtmlDocument doc = new HtmlWeb().Load(@url);
+
+            if(doc != null)
+            {
+                String imageUri = doc.DocumentNode.SelectSingleNode("//img").GetAttributeValue("src", "");
+                System.Diagnostics.Debug.Write("\nImage Uri = " + imageUri + "\n");
+
+                String text = doc.DocumentNode.SelectSingleNode("//h1").InnerText;
+                System.Diagnostics.Debug.Write("\nText = " + text + "\n");
+                return imageUri;
+            }
+
+            return String.Empty;
+        }
+
+        String GetNameFromPage(String url)
+        {
+            HtmlDocument doc = new HtmlWeb().Load(@url);
+
+            if (doc != null)
+            {
+                String text = doc.DocumentNode.SelectSingleNode("//h1").InnerText;
+                System.Diagnostics.Debug.Write("\nText = " + text + "\n");
+                return text;
+            }
+
+            return String.Empty;
         }
     }
 }
