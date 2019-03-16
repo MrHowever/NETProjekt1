@@ -14,6 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HtmlAgilityPack;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace Lab01
 {
@@ -23,7 +26,7 @@ namespace Lab01
     public partial class MainWindow : Window
     {
         public int SelectedIndex = -1;
-        public static string NonProfileImg = "C:\\Users\\Waldemar\\Desktop\\Platormy Programistyczne .NET i JAVA\\NETProjekt1\\Lab01\\Images\\"; 
+        public static string NonProfileImg = "E:\\Programming\\VS\\NETProjekt1\\Lab01\\Images\\"; 
 
         ObservableCollection<Person> people = new ObservableCollection<Person>
         {
@@ -44,6 +47,7 @@ namespace Lab01
             this.MinWidth = 750;
             this.MinHeight = 500;
 
+            GetImageWiki();
 
             ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
 
@@ -101,6 +105,44 @@ namespace Lab01
             addNewPersonButton.Content = "Change";
             btnImg.Content = "Change your picture...";
             SelectedIndex = listbox.SelectedIndex;
+        }
+
+        private String GetImageWiki()
+        {
+            String wiki = "https://en.wikipedia.org/wiki/Special:RandomInCategory/";
+            String keyword = "People";
+            Match compare;
+            HttpWebRequest request;
+            HttpWebResponse response;
+
+            do
+            {
+                System.Diagnostics.Debug.Write("\n\nUri: " + wiki + keyword+"\n");
+                request = (HttpWebRequest)WebRequest.Create(wiki + keyword);
+                request.AllowAutoRedirect = true;
+                request.Timeout = 10000;
+                response = (HttpWebResponse)request.GetResponse();
+                String responseUri = response.ResponseUri.ToString();
+                response.Close();
+                System.Diagnostics.Debug.Write("\n\nRandomizedUri: " + responseUri + "\n");
+                String[] parts = responseUri.Split('/');
+
+                compare = Regex.Match(parts.Last(), @"Category:.+");
+
+                if (compare.Success)
+                {
+                    String category = compare.Value;
+                    String[] words = category.Split(':');
+                    keyword = words.Last();
+                }
+                else
+                {
+                    keyword = parts.Last();
+                }
+            } while (compare.Success);
+
+           String result = "https://en.wikipedia.org/wiki/" + keyword;
+            return result;
         }
     }
 }

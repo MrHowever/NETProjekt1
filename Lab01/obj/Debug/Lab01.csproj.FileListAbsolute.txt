@@ -73,3 +73,7 @@ E:\Programming\VS\NETProjekt1\Lab01\obj\Debug\Lab01.csproj.GenerateResource.cach
 E:\Programming\VS\NETProjekt1\Lab01\obj\Debug\Lab01.csproj.CoreCompileInputs.cache
 E:\Programming\VS\NETProjekt1\Lab01\obj\Debug\Lab01.exe
 E:\Programming\VS\NETProjekt1\Lab01\obj\Debug\Lab01.pdb
+E:\Programming\VS\NETProjekt1\Lab01\bin\Debug\HtmlAgilityPack.dll
+E:\Programming\VS\NETProjekt1\Lab01\bin\Debug\HtmlAgilityPack.pdb
+E:\Programming\VS\NETProjekt1\Lab01\bin\Debug\HtmlAgilityPack.xml
+E:\Programming\VS\NETProjekt1\Lab01\obj\Debug\Lab01.csproj.CopyComplete
