@@ -183,10 +183,7 @@ namespace Lab01
             if(doc != null)
             {
                 String imageUri = doc.DocumentNode.SelectSingleNode("//img").GetAttributeValue("src", "");
-                System.Diagnostics.Debug.Write("\nImage Uri = " + imageUri + "\n");
-
                 String text = doc.DocumentNode.SelectSingleNode("//h1").InnerText;
-                System.Diagnostics.Debug.Write("\nText = " + text + "\n");
                 return imageUri;
             }
 
@@ -201,8 +198,6 @@ namespace Lab01
             if (doc != null)
             {
                 String text = doc.DocumentNode.SelectSingleNode("//h1").InnerText;
-                System.Diagnostics.Debug.Write("\nText = " + text + "\n");
-
                 String[] words = text.Split(' ');
                 name = words[0];
                 surname = String.Join(" ", words.Skip(1).ToList());
