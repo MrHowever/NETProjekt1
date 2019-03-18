@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab01"
         mc:Ignorable="d"
-        Title="Profiles" Height="500" Width="800">
+        Title="Profiles" Height="700" Width="1000">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListBox Margin="20" ItemsSource="{Binding Items}" MouseDoubleClick="ListBox_MouseDoubleClick">
+        <ListBox Margin="20,20,19.8,20.4" ItemsSource="{Binding Items}" MouseDoubleClick="ListBox_MouseDoubleClick">
             <ListBox.ItemTemplate >
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -22,7 +26,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Grid.Column="1" Margin="20" Orientation="Vertical">
+        <StackPanel Grid.Column="1" Margin="20.2,20,19.6,20.4" Orientation="Vertical">
             <TextBlock TextWrapping="Wrap" Text="Name" Margin="0,0,-0.2,0"/>
             <TextBox x:Name ="nameTextBox" Height="23" TextWrapping="Wrap" Text="Mariusz" Margin="0,0,-0.2,10"/>
             <TextBlock TextWrapping="Wrap" Text="Surname" Margin="0,0,-0.2,0"/>
@@ -32,6 +36,9 @@
             <TextBlock TextWrapping="Wrap" Text="Picture:"/>
             <TextBox x:Name="Path" TextWrapping="Wrap"/>
             <Button x:Name = "addNewPersonButton" Content="Add new person" Click="AddNewPersonButton_Click" Margin="91,10,91,0"/>
+            <Image x:Name="imgRandom" Height="148" Margin="161,10,160.8,15" Source="C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\nonprofile.png"/>
+            <TextBox x:Name="htmlHeader" Height="23" TextWrapping="Wrap" Text="Random Header" HorizontalAlignment="Center" Margin="1,0,-4,0" FlowDirection="RightToLeft" Width="458" HorizontalContentAlignment="Center"/>
+            <Button Content="Randomize content!" Margin="91,0,90.8,0" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </Window>

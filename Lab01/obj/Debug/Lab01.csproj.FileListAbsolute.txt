@@ -77,3 +77,7 @@ E:\Programming\VS\NETProjekt1\Lab01\bin\Debug\HtmlAgilityPack.dll
 E:\Programming\VS\NETProjekt1\Lab01\bin\Debug\HtmlAgilityPack.pdb
 E:\Programming\VS\NETProjekt1\Lab01\bin\Debug\HtmlAgilityPack.xml
 E:\Programming\VS\NETProjekt1\Lab01\obj\Debug\Lab01.csproj.CopyComplete
+C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\obj\Debug\Lab01.csproj.CopyComplete
