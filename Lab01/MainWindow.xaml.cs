@@ -220,7 +220,7 @@ namespace Lab01
 
             if (doc != null)
             {
-                String imageUri = doc.DocumentNode.SelectSingleNode("//img").GetAttributeValue("src", string.Empty);
+		String imageUri = "https:" + doc.DocumentNode.SelectSingleNode("//tr//td[@colspan='2']//a//img").GetAttributeValue("src", "");
                // String text = doc.DocumentNode.SelectSingleNode("//h1").InnerText;
                 return imageUri;
             }
