@@ -17,7 +17,8 @@ using System.Windows.Shapes;
 using HtmlAgilityPack;
 using System.Net;
 using System.Text.RegularExpressions;
-
+using System.Timers;
+using System.Windows.Threading;
 
 namespace Lab01
 {
@@ -27,6 +28,8 @@ namespace Lab01
     public partial class MainWindow : Window
     {
         public int SelectedIndex = -1;
+        Timer timer;
+
         public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
         //public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
        
@@ -109,6 +112,32 @@ namespace Lab01
             SelectedIndex = listbox.SelectedIndex;
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            timer = new Timer(5000);
+            timer.Elapsed += FillRandom;
+            timer.Start();
+        }
+
+        private void FillRandom(object sender, ElapsedEventArgs e)
+        {
+           Tuple<String, String, String> person = GetRandomPerson();
+
+           Application.Current.Dispatcher.Invoke(() =>
+             people.Add(new Person { Surname = person.Item2, Name = person.Item1, Img = person.Item3 })
+             );
+        }
+
+        private Tuple<String,String,String> GetRandomPerson()
+        {
+            String url = GetImageWiki();
+            Tuple<String, String> name = GetNameFromPage(url);
+            String image = GetImageFromPage(url);
+
+            Tuple<String, String, String> randomPerson = new Tuple<String, String, String>(name.Item1, name.Item2, image);
+            return randomPerson;
+        }
+
         private String GetImageWiki()
         {
             String wiki = "https://en.wikipedia.org/wiki/Special:RandomInCategory/";
@@ -163,18 +192,24 @@ namespace Lab01
             return String.Empty;
         }
 
-        String GetNameFromPage(String url)
+        private Tuple<String,String> GetNameFromPage(String url)
         {
             HtmlDocument doc = new HtmlWeb().Load(@url);
+            String name, surname;
 
             if (doc != null)
             {
                 String text = doc.DocumentNode.SelectSingleNode("//h1").InnerText;
                 System.Diagnostics.Debug.Write("\nText = " + text + "\n");
-                return text;
+
+                String[] words = text.Split(' ');
+                name = words[0];
+                surname = String.Join(" ", words.Skip(1).ToList());
+
+                return new Tuple<String,String>(name,surname);
             }
 
-            return String.Empty;
+            return new Tuple<String,String>(String.Empty,String.Empty);
         }
     }
 }
