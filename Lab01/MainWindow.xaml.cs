@@ -52,6 +52,9 @@ namespace Lab01
             this.MinWidth = 750;
             this.MinHeight = 500;
 
+            timer = new Timer(5000);
+            timer.Elapsed += FillRandom;
+
             GetImageFromPage(GetImageWiki());
 
             ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
@@ -114,8 +117,6 @@ namespace Lab01
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            timer = new Timer(5000);
-            timer.Elapsed += FillRandom;
             timer.Start();
         }
 
