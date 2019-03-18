@@ -54,7 +54,7 @@ namespace Lab01
             this.MinHeight = 500;
 
             timer = new Timer(5000);
-            timer.Elapsed += FillRandom;
+            timer.Elapsed += FillRandomAsync;
 
            // GetImageFromPage(GetImageWiki());
 
@@ -121,9 +121,9 @@ namespace Lab01
             timer.Start();
         }
 
-        private async void FillRandom(object sender, ElapsedEventArgs e)
+        private async void FillRandomAsync(object sender, ElapsedEventArgs e)
         {
-            Tuple<String, String, String> person = await GetRandomPerson();
+            Tuple<String, String, String> person = await GetRandomPersonAsync();
 
             Application.Current.Dispatcher.Invoke(() =>
               people.Add(new Person { Surname = person.Item2, Name = person.Item1, Img = person.Item3 })
@@ -131,15 +131,14 @@ namespace Lab01
         }
 
 
-               private async Task<Tuple<String,String,String>> GetRandomPerson()
-                {
-                    String url = await GetImageWiki();
-                    Tuple<String, String> name = GetNameFromPage(url);
-                    String image = GetImageFromPage(url);
-
-                    Tuple<String, String, String> randomPerson = new Tuple<String, String, String>(name.Item1, name.Item2, image);
-                    return randomPerson;
-                }
+         private async Task<Tuple<String,String,String>> GetRandomPersonAsync()
+         {
+            String url = await GetImageWiki();
+            Tuple<String, String> name = GetNameFromPage(url);
+            String image = GetImageFromPage(url);
+            Tuple<String, String, String> randomPerson = new Tuple<String, String, String>(name.Item1, name.Item2, image);
+            return randomPerson;
+         }
               
       /*  private String GetImageWiki()
          {
@@ -191,7 +190,7 @@ namespace Lab01
                 request = (HttpWebRequest)WebRequest.Create(wiki + keyword);
                 request.AllowAutoRedirect = true;
                 request.Timeout = 10000;
-                response = await request.GetResponseAsync();
+                response = await request.GetResponseAsync(); 
                 String responseUri = response.ResponseUri.ToString();
                 response.Close();
 
@@ -215,36 +214,19 @@ namespace Lab01
             return result;
         }
     
-
         String GetImageFromPage(String url)
         {
             HtmlDocument doc = new HtmlWeb().Load(@url);
 
             if (doc != null)
             {
-                String imageUri = doc.DocumentNode.SelectSingleNode("//img").GetAttributeValue("src", "");
-                String text = doc.DocumentNode.SelectSingleNode("//h1").InnerText;
+                String imageUri = doc.DocumentNode.SelectSingleNode("//img").GetAttributeValue("src", string.Empty);
+               // String text = doc.DocumentNode.SelectSingleNode("//h1").InnerText;
                 return imageUri;
             }
 
             return String.Empty;
         }
-
-        /*  String GetImageFromPage(String url)
-          {
-              HtmlDocument doc = new HtmlWeb().Load(@url);
-
-              if (doc != null)
-              {
-                  String imageUri = doc.DocumentNode.SelectSingleNode("//img").GetAttributeValue("src", "");
-                  String text = doc.DocumentNode.SelectSingleNode("//h1").InnerText;
-                  return imageUri;
-              }
-
-              return String.Empty;
-          }
-
-          */
 
         private Tuple<String, String> GetNameFromPage(String url)
         {
