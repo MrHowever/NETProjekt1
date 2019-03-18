@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HtmlAgilityPack;
 using System.Net;
+using System.Net.Http; 
 using System.Text.RegularExpressions;
 using System.Timers;
 using System.Windows.Threading;
@@ -30,9 +31,9 @@ namespace Lab01
         public int SelectedIndex = -1;
         Timer timer;
 
-        public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
-        //public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
-       
+        // public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
+        public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
+
         ObservableCollection<Person> people = new ObservableCollection<Person>
         {
             new Person { Name = "Jan", Surname = "Kowalski", Img = NonProfileImg + "Man2.jpeg" },
@@ -60,10 +61,10 @@ namespace Lab01
             ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
 
         }
-        
+
         private void AddNewPersonButton_Click(object sender, RoutedEventArgs e)
         {
-           
+
             String path = Path.Text != string.Empty ? Path.Text : NonProfileImg + "nonprofile.png";
 
             if (SelectedIndex >= 0)
@@ -73,8 +74,8 @@ namespace Lab01
                     Surname = ageTextBox.Text,
                     Name = nameTextBox.Text,
                     Img = Path.Text
-                };  
-                
+                };
+
                 addNewPersonButton.Content = "Add new person";
                 btnImg.Content = "Search your picture...";
                 SelectedIndex = -1;
@@ -95,7 +96,7 @@ namespace Lab01
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Title = "Select your picture...";
             openFile.Filter = "All files|*.jpg;*.jpeg;*.png|" + "JPEG (*.jpg;*.jpeg)|*jpg;*jpeg|" + "Portable Network Graphic (*.png)|*.png";
-            if(openFile.ShowDialog()==true)
+            if (openFile.ShowDialog() == true)
             {
                 ImgPerson.Source = new BitmapImage(new Uri(openFile.FileName));
                 Path.Text = openFile.FileName;
@@ -122,37 +123,75 @@ namespace Lab01
 
         private void FillRandom(object sender, ElapsedEventArgs e)
         {
-           Tuple<String, String, String> person = GetRandomPerson();
+            Tuple<String, String, String> person = GetRandomPerson();
 
-           Application.Current.Dispatcher.Invoke(() =>
-             people.Add(new Person { Surname = person.Item2, Name = person.Item1, Img = person.Item3 })
-             );
+            Application.Current.Dispatcher.Invoke(() =>
+              people.Add(new Person { Surname = person.Item2, Name = person.Item1, Img = person.Item3 })
+              );
         }
 
-        private Tuple<String,String,String> GetRandomPerson()
-        {
-            String url = GetImageWiki();
-            Tuple<String, String> name = GetNameFromPage(url);
-            String image = GetImageFromPage(url);
 
-            Tuple<String, String, String> randomPerson = new Tuple<String, String, String>(name.Item1, name.Item2, image);
-            return randomPerson;
-        }
+                private Tuple<String,String,String> GetRandomPerson()
+                {
+                    String url = GetImageWiki();
+                    Tuple<String, String> name = GetNameFromPage(url);
+                    String image = GetImageFromPage(url);
 
+                    Tuple<String, String, String> randomPerson = new Tuple<String, String, String>(name.Item1, name.Item2, image);
+                    return randomPerson;
+                }
+              
         private String GetImageWiki()
+         {
+             String wiki = "https://en.wikipedia.org/wiki/Special:RandomInCategory/";
+             String keyword = "20th-century_Chancellors_of_Germany";
+             Match compare;
+             HttpWebRequest request;
+             WebResponse response;
+
+             do
+             {
+                 request = (HttpWebRequest)WebRequest.Create(wiki + keyword);
+                 request.AllowAutoRedirect = true;
+                 request.Timeout = 10000;
+                 response = request.GetResponse();
+                 String responseUri = response.ResponseUri.ToString();
+                 response.Close();
+
+                 String[] parts = responseUri.Split('/');
+                 compare = Regex.Match(parts.Last(), @"Category:.+");
+
+                 if (compare.Success)
+                 {
+                     String category = compare.Value;
+                     String[] words = category.Split(':');
+                     keyword = words.Last();
+                 }
+                 else
+                 {
+                     keyword = parts.Last();
+                 }
+             } while (compare.Success);
+
+             String result = "https://en.wikipedia.org/wiki/" + keyword;
+             System.Diagnostics.Debug.Write("\n" + result + "\n");
+             return result;
+         }
+
+      /*  private async Task<String> GetImageWiki()
         {
             String wiki = "https://en.wikipedia.org/wiki/Special:RandomInCategory/";
             String keyword = "20th-century_Chancellors_of_Germany";
             Match compare;
             HttpWebRequest request;
-            HttpWebResponse response;
+            WebResponse response;
 
             do
             {
                 request = (HttpWebRequest)WebRequest.Create(wiki + keyword);
                 request.AllowAutoRedirect = true;
                 request.Timeout = 10000;
-                response = (HttpWebResponse)request.GetResponse();
+                response = await request.GetResponseAsync();
                 String responseUri = response.ResponseUri.ToString();
                 response.Close();
 
@@ -171,16 +210,17 @@ namespace Lab01
                 }
             } while (compare.Success);
 
-           String result = "https://en.wikipedia.org/wiki/" + keyword;
+            String result = "https://en.wikipedia.org/wiki/" + keyword;
             System.Diagnostics.Debug.Write("\n" + result + "\n");
             return result;
         }
+        */
 
         String GetImageFromPage(String url)
         {
             HtmlDocument doc = new HtmlWeb().Load(@url);
 
-            if(doc != null)
+            if (doc != null)
             {
                 String imageUri = doc.DocumentNode.SelectSingleNode("//img").GetAttributeValue("src", "");
                 String text = doc.DocumentNode.SelectSingleNode("//h1").InnerText;
@@ -190,7 +230,23 @@ namespace Lab01
             return String.Empty;
         }
 
-        private Tuple<String,String> GetNameFromPage(String url)
+        /*  String GetImageFromPage(String url)
+          {
+              HtmlDocument doc = new HtmlWeb().Load(@url);
+
+              if (doc != null)
+              {
+                  String imageUri = doc.DocumentNode.SelectSingleNode("//img").GetAttributeValue("src", "");
+                  String text = doc.DocumentNode.SelectSingleNode("//h1").InnerText;
+                  return imageUri;
+              }
+
+              return String.Empty;
+          }
+
+          */
+
+        private Tuple<String, String> GetNameFromPage(String url)
         {
             HtmlDocument doc = new HtmlWeb().Load(@url);
             String name, surname;
@@ -202,10 +258,10 @@ namespace Lab01
                 name = words[0];
                 surname = String.Join(" ", words.Skip(1).ToList());
 
-                return new Tuple<String,String>(name,surname);
+                return new Tuple<String, String>(name, surname);
             }
 
-            return new Tuple<String,String>(String.Empty,String.Empty);
+            return new Tuple<String, String>(String.Empty, String.Empty);
         }
     }
 }
