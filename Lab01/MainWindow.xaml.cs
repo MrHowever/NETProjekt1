@@ -56,7 +56,7 @@ namespace Lab01
             timer = new Timer(5000);
             timer.Elapsed += FillRandom;
 
-            GetImageFromPage(GetImageWiki());
+           // GetImageFromPage(GetImageWiki());
 
             ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
 
@@ -121,9 +121,9 @@ namespace Lab01
             timer.Start();
         }
 
-        private void FillRandom(object sender, ElapsedEventArgs e)
+        private async void FillRandom(object sender, ElapsedEventArgs e)
         {
-            Tuple<String, String, String> person = GetRandomPerson();
+            Tuple<String, String, String> person = await GetRandomPerson();
 
             Application.Current.Dispatcher.Invoke(() =>
               people.Add(new Person { Surname = person.Item2, Name = person.Item1, Img = person.Item3 })
@@ -131,9 +131,9 @@ namespace Lab01
         }
 
 
-                private Tuple<String,String,String> GetRandomPerson()
+               private async Task<Tuple<String,String,String>> GetRandomPerson()
                 {
-                    String url = GetImageWiki();
+                    String url = await GetImageWiki();
                     Tuple<String, String> name = GetNameFromPage(url);
                     String image = GetImageFromPage(url);
 
@@ -141,7 +141,7 @@ namespace Lab01
                     return randomPerson;
                 }
               
-        private String GetImageWiki()
+      /*  private String GetImageWiki()
          {
              String wiki = "https://en.wikipedia.org/wiki/Special:RandomInCategory/";
              String keyword = "20th-century_Chancellors_of_Germany";
@@ -176,9 +176,9 @@ namespace Lab01
              String result = "https://en.wikipedia.org/wiki/" + keyword;
              System.Diagnostics.Debug.Write("\n" + result + "\n");
              return result;
-         }
+         }*/
 
-      /*  private async Task<String> GetImageWiki()
+       private async Task<String> GetImageWiki()
         {
             String wiki = "https://en.wikipedia.org/wiki/Special:RandomInCategory/";
             String keyword = "20th-century_Chancellors_of_Germany";
@@ -214,7 +214,7 @@ namespace Lab01
             System.Diagnostics.Debug.Write("\n" + result + "\n");
             return result;
         }
-        */
+    
 
         String GetImageFromPage(String url)
         {
