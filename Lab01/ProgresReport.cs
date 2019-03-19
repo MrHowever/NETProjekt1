@@ -8,6 +8,7 @@ namespace Lab01
 {
     public class ProgresReport
     {
-        public int Percentage { get; set; } = 0; 
+        public int Percentage { get; set; } = 0;
+        public string progressInfo { get; set; } = string.Empty;
     }
 }

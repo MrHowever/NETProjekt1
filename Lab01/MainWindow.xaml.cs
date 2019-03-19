@@ -143,7 +143,8 @@ namespace Lab01
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    reportBar.Value = e.Percentage; 
+                    reportBar.Value = e.Percentage;
+                    progressInfo.Text = e.progressInfo; 
                 });
             }
             catch { } 
@@ -161,28 +162,33 @@ namespace Lab01
             int startLevel = 1;
             String url = await GetImageWiki();
             report.Percentage = CountPercentageProgress(startLevel,levelCount);
+            report.progressInfo = "Conneting with Wikipedia and getting url";
             progress.Report(report);
 
             startLevel += 1; 
             Tuple<String, String> name = GetNameFromPage(url);
             report.Percentage = CountPercentageProgress(startLevel, levelCount);
+            report.progressInfo = "Getting name of random 20th century Chancellor of Germany";
             progress.Report(report);
 
             startLevel += 1;
             String image = GetImageFromPage(url);
             report.Percentage = CountPercentageProgress(startLevel, levelCount);
+            report.progressInfo = "Getting image of random 20th century Chancellor of Germany";
             progress.Report(report);
 
             startLevel += 1;
             Tuple<String, String, String> randomPerson = new Tuple<String, String, String>(name.Item1, name.Item2, image);
-            report.Percentage = CountPercentageProgress(startLevel, levelCount); 
+            report.Percentage = CountPercentageProgress(startLevel, levelCount);
+            report.progressInfo = "Saving data";
             progress.Report(report);
              
             /* Zakomentowane, bo nie wiadać, że ProgressBar działa do końca -
              * operacje w drugiej połowie etpów odczytu danych są zbyt szybkie 
              * przez co zeruje sie druga część PorgressBaru
-             *      report.Percentage = 0;
-             *      progress.Report(report);  
+             *    report.Percentage = 0;
+             *    report.progressInfo = "Ready!"; 
+             *    progress.Report(report);  
              */
                   
             return randomPerson;
