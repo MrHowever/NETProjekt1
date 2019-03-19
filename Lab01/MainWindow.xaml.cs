@@ -20,6 +20,7 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Timers;
 using System.Windows.Threading;
+using System.ComponentModel;
 
 namespace Lab01
 {
@@ -30,6 +31,8 @@ namespace Lab01
     {
         public int SelectedIndex = -1;
         Timer timer;
+       // public IProgress<ProgresReport> progress;
+       // public ProgresReport report = new ProgresReport();
 
         // public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
         public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
@@ -44,6 +47,7 @@ namespace Lab01
         {
             get => people;
         }
+        public object ProgresChanged { get; private set; }
 
         public MainWindow()
         {
@@ -53,7 +57,7 @@ namespace Lab01
             this.MinWidth = 750;
             this.MinHeight = 500;
 
-            timer = new Timer(5000);
+            timer = new Timer(3000);
             timer.Elapsed += FillRandomAsync;
 
            // GetImageFromPage(GetImageWiki());
@@ -123,20 +127,64 @@ namespace Lab01
 
         private async void FillRandomAsync(object sender, ElapsedEventArgs e)
         {
-            Tuple<String, String, String> person = await GetRandomPersonAsync();
+            Progress<ProgresReport> progress = new Progress<ProgresReport>();
+            progress.ProgressChanged += ReportProgress; 
+
+            Tuple<String, String, String> person = await GetRandomPersonAsync(progress);
 
             Application.Current.Dispatcher.Invoke(() =>
               people.Add(new Person { Surname = person.Item2, Name = person.Item1, Img = person.Item3 })
               );
         }
 
+        private void ReportProgress(object sender, ProgresReport e)
+        {
+             try
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    reportBar.Value = e.Percentage; 
+                });
+            }
+            catch { } 
+        }
+        private int CountPercentageProgress(int level, int levelCount)
+        {
+            return (level * 100) / levelCount;
+        }
 
-         private async Task<Tuple<String,String,String>> GetRandomPersonAsync()
+        private async Task<Tuple<String,String,String>> GetRandomPersonAsync(IProgress<ProgresReport> progress)
          {
+            ProgresReport report = new ProgresReport();
+            int levelCount = 4;
+
+            int startLevel = 1;
             String url = await GetImageWiki();
+            report.Percentage = CountPercentageProgress(startLevel,levelCount);
+            progress.Report(report);
+
+            startLevel += 1; 
             Tuple<String, String> name = GetNameFromPage(url);
+            report.Percentage = CountPercentageProgress(startLevel, levelCount);
+            progress.Report(report);
+
+            startLevel += 1;
             String image = GetImageFromPage(url);
+            report.Percentage = CountPercentageProgress(startLevel, levelCount);
+            progress.Report(report);
+
+            startLevel += 1;
             Tuple<String, String, String> randomPerson = new Tuple<String, String, String>(name.Item1, name.Item2, image);
+            report.Percentage = CountPercentageProgress(startLevel, levelCount); 
+            progress.Report(report);
+             
+            /* Zakomentowane, bo nie wiadać, że ProgressBar działa do końca -
+             * operacje w drugiej połowie etpów odczytu danych są zbyt szybkie 
+             * przez co zeruje sie druga część PorgressBaru
+             *      report.Percentage = 0;
+             *      progress.Report(report);  
+             */
+                  
             return randomPerson;
          }
               
@@ -184,7 +232,7 @@ namespace Lab01
             Match compare;
             HttpWebRequest request;
             WebResponse response;
-
+           
             do
             {
                 request = (HttpWebRequest)WebRequest.Create(wiki + keyword);
@@ -211,6 +259,8 @@ namespace Lab01
 
             String result = "https://en.wikipedia.org/wiki/" + keyword;
             System.Diagnostics.Debug.Write("\n" + result + "\n");
+        //    report.Percentage = (1 * 100) / 4;
+         //   progress.Report(report); 
             return result;
         }
     
@@ -220,10 +270,12 @@ namespace Lab01
 
             if (doc != null)
             {
-		String imageUri = "https:" + doc.DocumentNode.SelectSingleNode("//tr//td[@colspan='2']//a//img").GetAttributeValue("src", "");
-               // String text = doc.DocumentNode.SelectSingleNode("//h1").InnerText;
+                String imageUri = "https:" + doc.DocumentNode.SelectSingleNode("//tr//td[@colspan='2']//a//img").GetAttributeValue("src", "");
+                // String text = doc.DocumentNode.SelectSingleNode("//h1").InnerText;
                 return imageUri;
             }
+          //  report.Percentage = (4 * 100) / 4;
+          //  progress.Report(report);
 
             return String.Empty;
         }
@@ -242,7 +294,8 @@ namespace Lab01
 
                 return new Tuple<String, String>(name, surname);
             }
-
+         //   report.Percentage = (3 * 100) / 4;
+         //   progress.Report(report);
             return new Tuple<String, String>(String.Empty, String.Empty);
         }
     }
