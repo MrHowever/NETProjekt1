@@ -189,7 +189,9 @@ namespace Lab01
              * operacje w drugiej połowie etpów odczytu danych są zbyt szybkie 
              * przez co zeruje sie druga część PorgressBaru
              */    report.Percentage = 0;
-                 report.progressInfo = "Ready"; 
+
+                
+                 report.progressInfo = timer.Enabled ? "Ready" : "Random content stopped"; 
                  progress.Report(report);  
              
                   
@@ -270,8 +272,10 @@ namespace Lab01
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             timer.Stop();
-            progressInfo.Text = "Random content stopped";
-            reportBar.Value = 0; 
+
+            if(progressInfo.Text == "Ready")
+                progressInfo.Text = "Random content stopped";
+            //reportBar.Value = 0; 
         }
     }
 }
