@@ -186,52 +186,15 @@ namespace Lab01
             /* Zakomentowane, bo nie wiadać, że ProgressBar działa do końca -
              * operacje w drugiej połowie etpów odczytu danych są zbyt szybkie 
              * przez co zeruje sie druga część PorgressBaru
-             *    report.Percentage = 0;
-             *    report.progressInfo = "Ready!"; 
-             *    progress.Report(report);  
-             */
+             */    report.Percentage = 0;
+                 report.progressInfo = "Ready"; 
+                 progress.Report(report);  
+             
                   
             return randomPerson;
-         }
+        }
               
-      /*  private String GetImageWiki()
-         {
-             String wiki = "https://en.wikipedia.org/wiki/Special:RandomInCategory/";
-             String keyword = "20th-century_Chancellors_of_Germany";
-             Match compare;
-             HttpWebRequest request;
-             WebResponse response;
-
-             do
-             {
-                 request = (HttpWebRequest)WebRequest.Create(wiki + keyword);
-                 request.AllowAutoRedirect = true;
-                 request.Timeout = 10000;
-                 response = request.GetResponse();
-                 String responseUri = response.ResponseUri.ToString();
-                 response.Close();
-
-                 String[] parts = responseUri.Split('/');
-                 compare = Regex.Match(parts.Last(), @"Category:.+");
-
-                 if (compare.Success)
-                 {
-                     String category = compare.Value;
-                     String[] words = category.Split(':');
-                     keyword = words.Last();
-                 }
-                 else
-                 {
-                     keyword = parts.Last();
-                 }
-             } while (compare.Success);
-
-             String result = "https://en.wikipedia.org/wiki/" + keyword;
-             System.Diagnostics.Debug.Write("\n" + result + "\n");
-             return result;
-         }*/
-
-       private async Task<String> GetImageWiki()
+        private async Task<String> GetImageWiki()
         {
             String wiki = "https://en.wikipedia.org/wiki/Special:RandomInCategory/";
             String keyword = "20th-century_Chancellors_of_Germany";
@@ -265,8 +228,7 @@ namespace Lab01
 
             String result = "https://en.wikipedia.org/wiki/" + keyword;
             System.Diagnostics.Debug.Write("\n" + result + "\n");
-        //    report.Percentage = (1 * 100) / 4;
-         //   progress.Report(report); 
+ 
             return result;
         }
     
@@ -280,8 +242,7 @@ namespace Lab01
                 // String text = doc.DocumentNode.SelectSingleNode("//h1").InnerText;
                 return imageUri;
             }
-          //  report.Percentage = (4 * 100) / 4;
-          //  progress.Report(report);
+       
 
             return String.Empty;
         }
@@ -300,9 +261,15 @@ namespace Lab01
 
                 return new Tuple<String, String>(name, surname);
             }
-         //   report.Percentage = (3 * 100) / 4;
-         //   progress.Report(report);
+       
             return new Tuple<String, String>(String.Empty, String.Empty);
+        }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Stop();
+            progressInfo.Text = "Random content stopped";
+            reportBar.Value = 0; 
         }
     }
 }

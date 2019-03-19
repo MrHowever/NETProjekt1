@@ -37,8 +37,10 @@
             <TextBox x:Name="Path" TextWrapping="Wrap"/>
             <Button x:Name = "addNewPersonButton" Content="Add new person" Click="AddNewPersonButton_Click" Margin="91,10,91,0"/>
             <Button x:Name="RandomButton" Content="Randomize content!" Margin="91,20,90.8,20" Click="Button_Click" />
+           
             <ProgressBar Height="5" Margin="10,10,9.8,10" Maximum="100" Minimum="0" Name ="reportBar"/>
             <TextBox x:Name="progressInfo" Height="22" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="2,0,-3.2,0" FlowDirection="RightToLeft" Width="458" HorizontalContentAlignment="Center"/>
+            <Button x:Name="RandomCancelButton" Content="Stop to randomize" Margin="91,20,90.8,20" Click="ButtonCancel_Click" />
         </StackPanel>
     </Grid>
 </Window>
