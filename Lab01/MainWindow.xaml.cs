@@ -34,8 +34,8 @@ namespace Lab01
        // public IProgress<ProgresReport> progress;
        // public ProgresReport report = new ProgresReport();
 
-        // public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
-        public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
+         public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
+        //public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
 
         ObservableCollection<Person> people = new ObservableCollection<Person>
         {
@@ -182,7 +182,9 @@ namespace Lab01
             report.Percentage = CountPercentageProgress(startLevel, levelCount);
             report.progressInfo = "Saving data";
             progress.Report(report);
-             
+
+            Task.Delay(100).Wait();
+
             /* Zakomentowane, bo nie wiadać, że ProgressBar działa do końca -
              * operacje w drugiej połowie etpów odczytu danych są zbyt szybkie 
              * przez co zeruje sie druga część PorgressBaru
