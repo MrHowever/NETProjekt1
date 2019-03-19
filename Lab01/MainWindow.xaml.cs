@@ -22,20 +22,18 @@ using System.Timers;
 using System.Windows.Threading;
 using System.ComponentModel;
 
+
 namespace Lab01
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
-        public int SelectedIndex = -1;
-        Timer timer;
-       // public IProgress<ProgresReport> progress;
-       // public ProgresReport report = new ProgresReport();
-
-         public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
-        //public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
+    { 
+         public int SelectedIndex = -1;
+         Timer timer;
+       // public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
+         public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
 
         ObservableCollection<Person> people = new ObservableCollection<Person>
         {
@@ -59,8 +57,6 @@ namespace Lab01
 
             timer = new Timer(3000);
             timer.Elapsed += FillRandomAsync;
-
-           // GetImageFromPage(GetImageWiki());
 
             ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
 
@@ -185,14 +181,9 @@ namespace Lab01
 
             Task.Delay(100).Wait();
 
-            /* Zakomentowane, bo nie wiadać, że ProgressBar działa do końca -
-             * operacje w drugiej połowie etpów odczytu danych są zbyt szybkie 
-             * przez co zeruje sie druga część PorgressBaru
-             */    report.Percentage = 0;
-
-                
-                 report.progressInfo = timer.Enabled ? "Ready" : "Random content stopped"; 
-                 progress.Report(report);  
+            report.Percentage = 0;
+            report.progressInfo = timer.Enabled ? "Ready" : "Random content stopped"; 
+            progress.Report(report);  
              
                   
             return randomPerson;
@@ -242,12 +233,10 @@ namespace Lab01
 
             if (doc != null)
             {
-                String imageUri = "https:" + doc.DocumentNode.SelectSingleNode("//tr//td[@colspan='2']//a//img").GetAttributeValue("src", "");
-                // String text = doc.DocumentNode.SelectSingleNode("//h1").InnerText;
-                return imageUri;
-            }
-       
+               String imageUri = "https:" + doc.DocumentNode.SelectSingleNode("//tr//td[@colspan='2']//a//img").GetAttributeValue("src", "");
 
+               return imageUri;
+            }
             return String.Empty;
         }
 
@@ -274,8 +263,7 @@ namespace Lab01
             timer.Stop();
 
             if(progressInfo.Text == "Ready")
-                progressInfo.Text = "Random content stopped";
-            //reportBar.Value = 0; 
+               progressInfo.Text = "Random content stopped";
         }
     }
 }
