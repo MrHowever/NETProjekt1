@@ -52,7 +52,7 @@ namespace Lab01
         {
             InitializeComponent();
             DataContext = this;
-            GetJSON();
+           // GetJSON(); 
             this.MinWidth = 750;
             this.MinHeight = 500;
 
@@ -62,11 +62,11 @@ namespace Lab01
             ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
 
         }
-        private async void GetJSON()
-        {
-            var json = await ConnectionAPI.GetAsync(NewsUri);
-            Article.Text = json;
-        }
+        //private async void GetJSON()
+        //{
+        //    var json = await ConnectionAPI.GetAsync(NewsUri);
+        //    Article.Text = json;
+        //}
         private void AddNewPersonButton_Click(object sender, RoutedEventArgs e)
         {
 
