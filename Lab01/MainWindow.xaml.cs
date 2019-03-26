@@ -32,6 +32,7 @@ namespace Lab01
     { 
          public int SelectedIndex = -1;
          Timer timer;
+        const string NewsUri = @"https://newsapi.org/v2/top-headlines?country=pl&apiKey=55d4ae5d63ed4fafa486a113d6dbfae0";
          //public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
          public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
 
@@ -51,7 +52,7 @@ namespace Lab01
         {
             InitializeComponent();
             DataContext = this;
-
+            GetJSON();
             this.MinWidth = 750;
             this.MinHeight = 500;
 
@@ -61,7 +62,11 @@ namespace Lab01
             ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
 
         }
-
+        private async void GetJSON()
+        {
+            var json = await ConnectionAPI.GetAsync(NewsUri);
+            Article.Text = json;
+        }
         private void AddNewPersonButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -264,6 +269,11 @@ namespace Lab01
 
             if(progressInfo.Text == "Ready")
                progressInfo.Text = "Random content stopped";
+        }
+
+        private void GetArticle_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

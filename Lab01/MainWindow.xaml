@@ -42,7 +42,7 @@
             <Button x:Name="RandomCancelButton" Content="Stop to randomize" Margin="91,10,90.8,10" Click="ButtonCancel_Click" />
             <TextBlock x:Name="Article" Height="160"/>
             <TextBox x:Name="Amount" Margin="0,5,0,0"/>
-            <Button x:Name="GetArticle"  Margin="91,10,90.8,10" Content="Get articles"/>
+            <Button x:Name="GetArticle"  Margin="91,10,90.8,10" Content="Get articles" Click="GetArticle_Click"/>
         </StackPanel>
         </Grid>
 </Window>
