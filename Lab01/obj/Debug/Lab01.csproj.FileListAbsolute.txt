@@ -84,3 +84,5 @@ C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01
 C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\Newtonsoft.Json.xml
+E:\Programming\VS\NETProjekt1\Lab01\bin\Debug\Newtonsoft.Json.dll
+E:\Programming\VS\NETProjekt1\Lab01\bin\Debug\Newtonsoft.Json.xml

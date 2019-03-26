@@ -33,15 +33,14 @@ namespace Lab01
          public int SelectedIndex = -1;
          Timer timer;
    
-        //public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
-        public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
+        public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
+        //public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
 
         //objects to JSON
-        const string NewsUri = @"https://newsapi.org/v2/top-headlines?country=pl&apiKey=55d4ae5d63ed4fafa486a113d6dbfae0";
+        string NewsUri = @"https://newsapi.org/v2/everything?domains=bbc.co.uk&from=2019-03-25&to=2019-03-25&apiKey=55d4ae5d63ed4fafa486a113d6dbfae0";
         public int NewsCounter { get; set; } = 0;
         public News.RootObject Root { get; set; } 
-
-
+        
         ObservableCollection<Person> people = new ObservableCollection<Person>
         {
             new Person { Name = "Jan", Surname = "Kowalski", Img = NonProfileImg + "Man2.jpeg" },
@@ -64,24 +63,34 @@ namespace Lab01
             CallAPI();
             timer = new Timer(3000);
             timer.Elapsed += FillRandomAsync;
-
+            
             ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
 
         }
         //methods created special to JSON newsAPI 
         private async void CallAPI()
         {
+            Random rand = new Random();
+            String randomDay = rand.Next(1, 26).ToString("D2");
+            NewsUri = @"https://newsapi.org/v2/everything?domains=bbc.co.uk&from=2019-03-"+randomDay+"&to=2019-03-"+randomDay+"&apiKey=55d4ae5d63ed4fafa486a113d6dbfae0";
             NewsCounter = 0;
             Root = await Config.Deserialize(NewsUri);
             SetUpArticle();
         }
         private void SetUpArticle()
         {
+            if (Root.articles.Length <= NewsCounter)
+            {
+                Article.AppendText("There are no more articles to be read!\n");
+                return;
+            }
+
             Article.AppendText("Title: " + Environment.NewLine + Root.articles[NewsCounter].title + Environment.NewLine );
             Article.AppendText("Description: " + Environment.NewLine + Root.articles[NewsCounter].description + Environment.NewLine + Environment.NewLine);
         }
         private void GetArticle_Click(object sender, RoutedEventArgs e)
         {
+            CallAPI();
             Article.Text = string.Empty;
             int amount = Convert.ToInt32(Amount.Text);
 
@@ -89,7 +98,7 @@ namespace Lab01
             {
                 int newsNumber = 0; 
 
-                for (int i = 0; i < amount; i++)
+                for (int i = 1; i < amount; i++)
                 { newsNumber += 1;
                     Article.AppendText("News nr: " + newsNumber + Environment.NewLine);
                     this.NewsCounter++;
