@@ -32,9 +32,15 @@ namespace Lab01
     { 
          public int SelectedIndex = -1;
          Timer timer;
+   
+        //public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
+        public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
+
+        //objects to JSON
         const string NewsUri = @"https://newsapi.org/v2/top-headlines?country=pl&apiKey=55d4ae5d63ed4fafa486a113d6dbfae0";
-         //public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
-         public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
+        public int NewsCounter { get; set; } = 0;
+        public News.RootObject Root { get; set; } 
+
 
         ObservableCollection<Person> people = new ObservableCollection<Person>
         {
@@ -55,12 +61,34 @@ namespace Lab01
            // GetJSON(); 
             this.MinWidth = 750;
             this.MinHeight = 500;
-
+            CallAPI();
             timer = new Timer(3000);
             timer.Elapsed += FillRandomAsync;
 
             ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
 
+        }
+        //methods created special to JSON newsAPI 
+        private async void CallAPI()
+        {
+            NewsCounter = 0;
+            Root = await Config.Deserialize(NewsUri);
+            SetUpArticle();
+        }
+        private void SetUpArticle()
+        {
+            Article.Text = string.Empty;
+            Article.AppendText(Root.articles[NewsCounter].title + Environment.NewLine + Environment.NewLine);
+            Article.AppendText(Root.articles[NewsCounter].description );
+        }
+        private void GetArticle_Click(object sender, RoutedEventArgs e)
+        {
+            if(NewsCounter < 9)
+            {
+                this.NewsCounter++;
+                SetUpArticle();
+            } 
+          
         }
         //private async void GetJSON()
         //{
@@ -271,9 +299,6 @@ namespace Lab01
                progressInfo.Text = "Random content stopped";
         }
 
-        private void GetArticle_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
     }
 }

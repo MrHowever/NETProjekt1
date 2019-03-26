@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,7 @@ namespace Lab01
         public static async Task<News.RootObject> Deserialize(string Uri)
         {
             var json = await ConnectionAPI.GetAsync(Uri);
-            return 
-
+            return JsonConvert.DeserializeObject<News.RootObject>(json);
         }
     }
 }
