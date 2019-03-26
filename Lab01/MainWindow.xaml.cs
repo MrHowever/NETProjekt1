@@ -77,17 +77,27 @@ namespace Lab01
         }
         private void SetUpArticle()
         {
-            Article.Text = string.Empty;
             Article.AppendText(Root.articles[NewsCounter].title + Environment.NewLine + Environment.NewLine);
-            Article.AppendText(Root.articles[NewsCounter].description );
+            Article.AppendText(Root.articles[NewsCounter].description + Environment.NewLine + Environment.NewLine + Environment.NewLine + Environment.NewLine);
         }
         private void GetArticle_Click(object sender, RoutedEventArgs e)
         {
-            if(NewsCounter < 9)
+            if (NewsCounter < 24)
+            {
+                Article.Text = string.Empty;
+            int amount = Convert.ToInt32(Amount.Text);
+            for (int i = 0; i < amount; i++)
             {
                 this.NewsCounter++;
                 SetUpArticle();
-            } 
+            }
+            }
+            else
+            {
+                Article.Text = "Too much";
+
+            }
+            NewsCounter = 0;
           
         }
         //private async void GetJSON()
