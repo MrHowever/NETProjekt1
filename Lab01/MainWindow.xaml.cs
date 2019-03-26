@@ -77,23 +77,35 @@ namespace Lab01
         }
         private void SetUpArticle()
         {
-            Article.AppendText(Root.articles[NewsCounter].title + Environment.NewLine + Environment.NewLine);
-            Article.AppendText(Root.articles[NewsCounter].description + Environment.NewLine + Environment.NewLine + Environment.NewLine + Environment.NewLine);
+            Article.AppendText("Title: " + Environment.NewLine + Root.articles[NewsCounter].title + Environment.NewLine );
+            Article.AppendText("Description: " + Environment.NewLine + Root.articles[NewsCounter].description + Environment.NewLine + Environment.NewLine);
         }
         private void GetArticle_Click(object sender, RoutedEventArgs e)
         {
-            if (NewsCounter < 24)
-            {
-                Article.Text = string.Empty;
-                int amount = Convert.ToInt32(Amount.Text);
+            Article.Text = string.Empty;
+            int amount = Convert.ToInt32(Amount.Text);
 
-                 for (int i = 0; i < amount; i++)
-                 {
+            if ( amount < 20 && amount >0 )
+            {
+                int newsNumber = 0; 
+
+                for (int i = 0; i < amount; i++)
+                { newsNumber += 1;
+                    Article.AppendText("News nr: " + newsNumber + Environment.NewLine);
                     this.NewsCounter++;
                     SetUpArticle();
-                 }
+                    Article.AppendText("____________________________"  + Environment.NewLine);
+                }
+            } else if(amount >=20 )
+            {
+                Article.Text = string.Empty;
+                Article.Text = "You want too much!" + Environment.NewLine + "You can't get more than 19 news"; 
             }
-           
+           else if(amount <=0)
+            {
+                Article.Text = string.Empty;
+                Article.Text = "Number must be more than 0";
+            }
             NewsCounter = 0;
           
         }
