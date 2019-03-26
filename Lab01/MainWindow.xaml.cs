@@ -85,18 +85,15 @@ namespace Lab01
             if (NewsCounter < 24)
             {
                 Article.Text = string.Empty;
-            int amount = Convert.ToInt32(Amount.Text);
-            for (int i = 0; i < amount; i++)
-            {
-                this.NewsCounter++;
-                SetUpArticle();
-            }
-            }
-            else
-            {
-                Article.Text = "Too much";
+                int amount = Convert.ToInt32(Amount.Text);
 
+                 for (int i = 0; i < amount; i++)
+                 {
+                    this.NewsCounter++;
+                    SetUpArticle();
+                 }
             }
+           
             NewsCounter = 0;
           
         }
