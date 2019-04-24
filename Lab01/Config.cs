@@ -12,6 +12,9 @@ namespace Lab01
         public static async Task<News.RootObject> Deserialize(string Uri)
         {
             var json = await ConnectionAPI.GetAsync(Uri);
+
+            System.Diagnostics.Debug.Write(json);
+
             return JsonConvert.DeserializeObject<News.RootObject>(json);
         }
     }

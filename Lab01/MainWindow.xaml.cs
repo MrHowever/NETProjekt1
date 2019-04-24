@@ -72,7 +72,7 @@ namespace Lab01
         {
             Random rand = new Random();
             String randomDay = rand.Next(1, 26).ToString("D2");
-            NewsUri = @"https://newsapi.org/v2/everything?domains=bbc.co.uk&from=2019-03-"+randomDay+"&to=2019-03-"+randomDay+"&apiKey=55d4ae5d63ed4fafa486a113d6dbfae0";
+            NewsUri = @"https://api.yelp.com/v3/businesses/search?location=%22NYC%22";
             NewsCounter = 0;
             Root = await Config.Deserialize(NewsUri);
             SetUpArticle();
