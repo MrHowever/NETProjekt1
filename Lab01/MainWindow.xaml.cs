@@ -33,8 +33,8 @@ namespace Lab01
          public int SelectedIndex = -1;
          Timer timer;
    
-        //public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
-        public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
+        public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
+        //public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
 
         //objects to JSON
         string NewsUri = @"https://newsapi.org/v2/everything?domains=bbc.co.uk&from=2019-03-25&to=2019-03-25&apiKey=55d4ae5d63ed4fafa486a113d6dbfae0";
@@ -70,12 +70,22 @@ namespace Lab01
         //methods created special to JSON newsAPI 
         private async void CallAPI()
         {
-            Random rand = new Random();
-            String randomDay = rand.Next(1, 26).ToString("D2");
+            Yelp yelpApi = new Yelp();
             NewsUri = @"https://api.yelp.com/v3/businesses/search?location=%22NYC%22";
             NewsCounter = 0;
-            Root = await Config.Deserialize(NewsUri);
-            SetUpArticle();
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            dict.Add("term", "delis");
+            dict.Add("latitude", "37.786882");
+            dict.Add("longitude", "-122.399972");
+            var rootObject = await yelpApi.GetJsonAsync(dict);
+
+            System.Diagnostics.Debug.Write("\n\n\n"+rootObject.businesses.Length+"\n\n\n");
+            foreach(var business in rootObject.businesses)
+            {
+                System.Diagnostics.Debug.Write(business.name+"\n");
+            }
+
+            //SetUpArticle();
         }
         private void SetUpArticle()
         {

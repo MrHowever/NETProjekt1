@@ -71,6 +71,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="YelpJSON.cs" />
+    <Compile Include="Yelp.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="ConnectionAPI.cs" />
     <Compile Include="MainWindow.xaml.cs">
