@@ -70,13 +70,9 @@ namespace Lab01
 
                 stringBuilder.Append(queryParam.Key + "=" + queryParam.Value);
             }
-
-            System.Diagnostics.Debug.Write(stringBuilder.ToString());
-
+            
             var Json = await GetResponseAsync("\n\n"+stringBuilder.ToString()+"\n\n");
-
-            System.Diagnostics.Debug.Write("\n\n"+Json+"\n\n");
-
+            
             return JsonConvert.DeserializeObject<YelpJSON.RootObject>(Json);
         }
     }

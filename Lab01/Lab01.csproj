@@ -71,6 +71,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="YelpScraper.cs" />
     <Compile Include="YelpJSON.cs" />
     <Compile Include="Yelp.cs" />
     <Compile Include="Config.cs" />

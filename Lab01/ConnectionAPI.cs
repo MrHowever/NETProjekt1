@@ -21,18 +21,6 @@ namespace Lab01
             StreamReader reader = new StreamReader(stream);
 
             return await reader.ReadToEndAsync();
-
-            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            //request.Method = "GET";
-            //request.Headers["Authorization"] = "Bearer MrNJDxdn4NwNw0Q5qzeNLl8SpJvUmEv7zoZIj8MCA5FVjkUSCyqyjxlS8_qjzBQMVSZSy5SIGYentHW_0JbfZQEpoiu2LlOXdASfJtg9qKLbp2mn925tkOyPYZ6kXHYx";
-            /* 
-            using (HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync())
-            using (Stream stream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                return await reader.ReadToEndAsync();
-            }
-            */
         }
     }
 }
