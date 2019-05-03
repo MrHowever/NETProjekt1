@@ -46,6 +46,35 @@ namespace Lab01
             String name = page.DocumentNode.SelectSingleNode("//meta[@property='og:title']").Attributes["content"].Value.Split('-')[0];
             String image = page.DocumentNode.SelectSingleNode("//meta[@property='og:image']").Attributes["content"].Value;
 
+
+            IList<Review> reviewsArr = new List<Review>();
+            int i = 0;
+            while(true)
+            { 
+                bizPage = "/biz/aioli-warszawa";
+                String reviewPageUrl = baseUrl + bizPage + "?start=" + i;
+                page = new HtmlWeb().Load(reviewPageUrl);
+                var reviews = page.DocumentNode.SelectNodes("//div[@itemprop='review']");
+
+                if (reviews == null)
+                    break;
+
+                foreach(var review in reviews)
+                {
+                    String rating = review.SelectSingleNode("div[@itemprop='reviewRating']").SelectSingleNode("meta[@itemprop='ratingValue']").Attributes["content"].Value;
+                    String date = review.SelectSingleNode("meta[@itemprop='datePublished']").Attributes["content"].Value;
+                    String author = review.SelectSingleNode("meta[@itemprop='author']").Attributes["content"].Value;
+                    reviewsArr.Add(new Review(rating, date));
+                }
+
+                i += 20;
+
+                //TODO Add return reviewsArr
+            }
+
+            IEnumerable<Review> sortedEnum = reviewsArr.OrderBy(f=>f.Date, new DateComparator());
+            IList<Review> sortedReviews = sortedEnum.ToList();
+
             return new Tuple<String, String>(name, image);
         }
     }

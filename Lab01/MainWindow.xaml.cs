@@ -60,6 +60,8 @@ namespace Lab01
            // GetJSON(); 
             this.MinWidth = 750;
             this.MinHeight = 500;
+            YelpScraper scraper = new YelpScraper();
+            scraper.GetRandomPlace();
             CallAPI();
             timer = new Timer(3000);
             timer.Elapsed += FillRandomAsync;
