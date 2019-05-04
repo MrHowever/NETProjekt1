@@ -33,8 +33,8 @@ namespace Lab01
          public int SelectedIndex = -1;
          Timer timer;
    
-        public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
-//        public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
+   //     public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
+       public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
 
         //objects to JSON
         string NewsUri = @"https://newsapi.org/v2/everything?domains=bbc.co.uk&from=2019-03-25&to=2019-03-25&apiKey=55d4ae5d63ed4fafa486a113d6dbfae0";
@@ -330,6 +330,10 @@ namespace Lab01
                progressInfo.Text = "Random content stopped";
         }
 
-       
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            DatabasePage databasePage = new DatabasePage();
+            databasePage.ShowDialog(); 
+        }
     }
 }
