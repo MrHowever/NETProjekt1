@@ -54,10 +54,17 @@ namespace Lab01
                     price = priceTextBox.Text,
                     city = cityTextBox.Text
                 };
+
+                
                 _db.BusinessSpecifics.Add(newYelp);
                 _db.SaveChanges();
 
                 dataGrid.ItemsSource = _db.BusinessSpecifics.ToList();
+                nameTextBox.Text = string.Empty;
+                ratingTextBox.Text = string.Empty;
+                priceTextBox.Text = string.Empty;
+                cityTextBox.Text = string.Empty;
+
             }
 
 
@@ -73,6 +80,35 @@ namespace Lab01
             insertBtn.Content = "Udpdate";
             index = Id; 
 
+        }
+
+        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int Id = (myDataGrid.SelectedItem as BusinessSpecifics).id;
+            var deleteBS = _db.BusinessSpecifics.Where(m => m.id == Id).Single();
+            _db.BusinessSpecifics.Remove(deleteBS);
+            _db.SaveChanges();
+            myDataGrid.ItemsSource = _db.BusinessSpecifics.ToList();
+
+            insertBtn.Content = "Insert";
+            nameTextBox.Text = string.Empty;
+            ratingTextBox.Text = string.Empty;
+            priceTextBox.Text = string.Empty;
+            cityTextBox.Text = string.Empty;
+
+        }
+
+        private void SelectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string startLetter = FirstLetter.Text;
+
+            var result = _db.BusinessSpecifics.AsQueryable();
+            if (!string.IsNullOrWhiteSpace(startLetter))
+            {
+                result = result.Where(x => x.name.StartsWith(startLetter));
+            }
+
+            myDataGrid.ItemsSource = result.ToList();
         }
     }
 }
