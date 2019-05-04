@@ -88,3 +88,8 @@ E:\Programming\VS\NETProjekt1\Lab01\bin\Debug\Newtonsoft.Json.dll
 E:\Programming\VS\NETProjekt1\Lab01\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\obj\Debug\DatabasePage.g.cs
 C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\obj\Debug\DatabasePage.baml
+C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\EntityFramework.dll
+C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\EntityFramework.xml
+C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\obj\Debug\Lab01_Content.g.cs

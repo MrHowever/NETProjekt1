@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace Lab01
 {
@@ -19,9 +11,35 @@ namespace Lab01
     /// </summary>
     public partial class DatabasePage : Window
     {
+        PlaceEntities _db = new PlaceEntities();
+        public static DataGrid dataGrid;
+
         public DatabasePage()
         {
             InitializeComponent();
+            Load();
+        }
+
+        private void Load()
+        {
+            myDataGrid.ItemsSource = _db.BusinessSpecifics.ToList();
+            dataGrid = myDataGrid;
+        }
+
+        private void InsertBtn_Click(object sender, RoutedEventArgs e)
+        {
+            BusinessSpecifics newYelp = new BusinessSpecifics()
+            {
+                name = nameTextBox.Text,
+                rating = Convert.ToInt32(ratingTextBox.Text),
+                price = priceTextBox.Text,
+                city = cityTextBox.Text
+            };
+
+            _db.BusinessSpecifics.Add(newYelp);
+            _db.SaveChanges();
+
+            dataGrid.ItemsSource = _db.BusinessSpecifics.ToList();
         }
     }
 }
