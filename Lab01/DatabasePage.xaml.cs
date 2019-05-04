@@ -3,7 +3,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-
 namespace Lab01
 {
     /// <summary>
@@ -13,6 +12,7 @@ namespace Lab01
     {
         PlaceEntities _db = new PlaceEntities();
         public static DataGrid dataGrid;
+        int index = -1;
 
         public DatabasePage()
         {
@@ -28,18 +28,51 @@ namespace Lab01
 
         private void InsertBtn_Click(object sender, RoutedEventArgs e)
         {
-            BusinessSpecifics newYelp = new BusinessSpecifics()
+           
+            if (index >= 0)
             {
-                name = nameTextBox.Text,
-                rating = Convert.ToInt32(ratingTextBox.Text),
-                price = priceTextBox.Text,
-                city = cityTextBox.Text
-            };
+                BusinessSpecifics updateBS = (from m in _db.BusinessSpecifics
+                                   where m.id == index
+                                   select m).Single();
+                updateBS.name = nameTextBox.Text;
+                updateBS.rating = Convert.ToInt32(ratingTextBox.Text);
+                updateBS.price = priceTextBox.Text;
+                updateBS.city = cityTextBox.Text;  
 
-            _db.BusinessSpecifics.Add(newYelp);
-            _db.SaveChanges();
+                _db.SaveChanges();
+                dataGrid.ItemsSource = _db.BusinessSpecifics.ToList();
 
-            dataGrid.ItemsSource = _db.BusinessSpecifics.ToList();
+                insertBtn.Content = "Insert";
+                index = -1; 
+            }
+            else
+            {
+                BusinessSpecifics newYelp = new BusinessSpecifics()
+                {
+                    name = nameTextBox.Text,
+                    rating = Convert.ToInt32(ratingTextBox.Text),
+                    price = priceTextBox.Text,
+                    city = cityTextBox.Text
+                };
+                _db.BusinessSpecifics.Add(newYelp);
+                _db.SaveChanges();
+
+                dataGrid.ItemsSource = _db.BusinessSpecifics.ToList();
+            }
+
+
+        }
+
+        private void MyDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            int Id = (myDataGrid.SelectedItem as BusinessSpecifics).id;
+            nameTextBox.Text = (myDataGrid.SelectedItem as BusinessSpecifics).name;
+            ratingTextBox.Text = (myDataGrid.SelectedItem as BusinessSpecifics).rating.ToString();
+            priceTextBox.Text = (myDataGrid.SelectedItem as BusinessSpecifics).price;
+            cityTextBox.Text = (myDataGrid.SelectedItem as BusinessSpecifics).city;
+            insertBtn.Content = "Udpdate";
+            index = Id; 
+
         }
     }
 }

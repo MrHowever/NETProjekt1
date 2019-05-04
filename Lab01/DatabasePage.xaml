@@ -12,7 +12,7 @@
             <RowDefinition Height="409*"/>
         </Grid.RowDefinitions>
         <DockPanel Margin="0,0,-0.4,0" Grid.RowSpan="2" >
-            <DataGrid x:Name="myDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ColumnWidth="*" Margin="0,0,0,228" >
+            <DataGrid x:Name="myDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ColumnWidth="*" Margin="0,0,0,228" MouseDoubleClick="MyDataGrid_MouseDoubleClick" >
                 <DataGrid.Columns>
 
                     <DataGridTextColumn Header="Name" Binding="{Binding name}" />
