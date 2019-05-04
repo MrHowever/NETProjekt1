@@ -120,9 +120,6 @@ namespace Lab01
             myDataGrid.ItemsSource = result.ToList();
         }
 
-        private void PriceCheckBtn_Click(object sender, RoutedEventArgs e)
-        {
-           
-        }
+       
     }
 }
