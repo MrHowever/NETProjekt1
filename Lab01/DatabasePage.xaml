@@ -19,7 +19,7 @@
                     <DataGridTextColumn Header="Rating" Binding="{Binding rating}" />
                     <DataGridTextColumn Header="Price" Binding="{Binding price}" />
                     <DataGridTextColumn Header="City" Binding="{Binding city}" />
-                    
+
                 </DataGrid.Columns>
 
             </DataGrid>
@@ -30,6 +30,11 @@
         <Button Margin="444,362.8,195.6,10" Name="selectBtn" Content="Select" Grid.Row="1" Click="SelectBtn_Click"  />
         <TextBox Name="FirstLetter" Margin="444,329.132,195.6,51" FontSize="16" Grid.Row="1"/>
         <TextBlock HorizontalAlignment="Left" Margin="444,307.132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="229" Text="Select by first letter of name" Grid.Row="1"/>
+
+        <Button Margin="630,362.8,9.6,10" Name="priceCheckBtn" Content="Select" Grid.Row="1" Click="PriceCheckBtn_Click"   />
+        <TextBox Name="priceCheck" Margin="630,328.8,9.6,51" FontSize="16" Grid.Row="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="630,306.8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="154" Text="Select by price " Grid.Row="1"/>
+
         <TextBox Name="nameTextBox" Margin="102,200.132,556.6,178" Grid.Row="1" />
         <TextBlock HorizontalAlignment="Left" Margin="47,214.132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="37" Text="Name:" Grid.Row="1"/>
         <TextBox Name="ratingTextBox" Margin="102,231.132,556.6,149" RenderTransformOrigin="0.509,0.453" Grid.Row="1" />

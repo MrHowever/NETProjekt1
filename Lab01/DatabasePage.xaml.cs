@@ -103,11 +103,24 @@ namespace Lab01
             string startLetter = FirstLetter.Text;
 
             var result = _db.BusinessSpecifics.AsQueryable();
+
             if (!string.IsNullOrWhiteSpace(startLetter))
             {
                 result = result.Where(x => x.name.StartsWith(startLetter));
             }
 
+            myDataGrid.ItemsSource = result.ToList();
+        }
+
+        private void PriceCheckBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string costs = priceCheck.Text;
+            var result = _db.BusinessSpecifics.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(costs))
+            {
+                result = result.Where(x => x.price.Equals(costs));
+            }
             myDataGrid.ItemsSource = result.ToList();
         }
     }
