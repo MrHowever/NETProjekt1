@@ -101,6 +101,7 @@ namespace Lab01
         private void SelectBtn_Click(object sender, RoutedEventArgs e)
         {
             string startLetter = FirstLetter.Text;
+            string costs = priceCheck.Text;
 
             var result = _db.BusinessSpecifics.AsQueryable();
 
@@ -110,18 +111,18 @@ namespace Lab01
             }
 
             myDataGrid.ItemsSource = result.ToList();
-        }
 
-        private void PriceCheckBtn_Click(object sender, RoutedEventArgs e)
-        {
-            string costs = priceCheck.Text;
-            var result = _db.BusinessSpecifics.AsQueryable();
-
-            if (!string.IsNullOrWhiteSpace(costs))
+           
+          if (!string.IsNullOrWhiteSpace(costs))
             {
                 result = result.Where(x => x.price.Equals(costs));
             }
             myDataGrid.ItemsSource = result.ToList();
+        }
+
+        private void PriceCheckBtn_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }

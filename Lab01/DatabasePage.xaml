@@ -27,11 +27,10 @@
         </DockPanel>
         <Button Margin="47,328.8,634.6,51" Name="insertBtn" Content="Insert"  RenderTransformOrigin="0.492,-0.82" Grid.Row="1" Click="InsertBtn_Click"/>
         <Button Margin="179,328.8,502.6,51" Name="deleteBtn" Content="Delete"  RenderTransformOrigin="0.492,-0.82" Grid.Row="1" Click="DeleteBtn_Click"/>
-        <Button Margin="444,362.8,195.6,10" Name="selectBtn" Content="Select" Grid.Row="1" Click="SelectBtn_Click"  />
+        <Button Margin="505,362.8,76.6,10" Name="selectBtn" Content="Select" Grid.Row="1" Click="SelectBtn_Click"  />
         <TextBox Name="FirstLetter" Margin="444,329.132,195.6,51" FontSize="16" Grid.Row="1"/>
         <TextBlock HorizontalAlignment="Left" Margin="444,307.132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="229" Text="Select by first letter of name" Grid.Row="1"/>
 
-        <Button Margin="630,362.8,9.6,10" Name="priceCheckBtn" Content="Select" Grid.Row="1" Click="PriceCheckBtn_Click"   />
         <TextBox Name="priceCheck" Margin="630,328.8,9.6,51" FontSize="16" Grid.Row="1"/>
         <TextBlock HorizontalAlignment="Left" Margin="630,306.8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="154" Text="Select by price " Grid.Row="1"/>
 
