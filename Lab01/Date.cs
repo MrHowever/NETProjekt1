@@ -17,7 +17,10 @@ namespace Lab01
             int.TryParse(components[2], out Day);
         }
 
-        //public static int CompareDates(Date date1, Date date2)
+        public String toString()
+        {
+            return Day + "-" + Month + "-" + Year;
+        }
     }
 
     public class DateComparator : IComparer<Date>

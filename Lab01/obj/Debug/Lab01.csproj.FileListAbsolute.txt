@@ -93,3 +93,10 @@ C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01
 C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\EntityFramework.xml
 C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\obj\Debug\Lab01_Content.g.cs
+E:\Programming\VS\NETProjekt1\Lab01\bin\Debug\EntityFramework.dll
+E:\Programming\VS\NETProjekt1\Lab01\bin\Debug\EntityFramework.SqlServer.dll
+E:\Programming\VS\NETProjekt1\Lab01\bin\Debug\EntityFramework.xml
+E:\Programming\VS\NETProjekt1\Lab01\bin\Debug\EntityFramework.SqlServer.xml
+E:\Programming\VS\NETProjekt1\Lab01\obj\Debug\DatabasePage.g.cs
+E:\Programming\VS\NETProjekt1\Lab01\obj\Debug\Lab01_Content.g.cs
+E:\Programming\VS\NETProjekt1\Lab01\obj\Debug\DatabasePage.baml

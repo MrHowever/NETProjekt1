@@ -87,6 +87,7 @@
     <Compile Include="BusinessSpecifics.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Chart.cs" />
     <Compile Include="DatabasePage.xaml.cs">
       <DependentUpon>DatabasePage.xaml</DependentUpon>
     </Compile>

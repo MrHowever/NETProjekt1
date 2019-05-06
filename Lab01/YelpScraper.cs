@@ -64,14 +64,17 @@ namespace Lab01
                     String rating = review.SelectSingleNode("div[@itemprop='reviewRating']").SelectSingleNode("meta[@itemprop='ratingValue']").Attributes["content"].Value;
                     String date = review.SelectSingleNode("meta[@itemprop='datePublished']").Attributes["content"].Value;
                     String author = review.SelectSingleNode("meta[@itemprop='author']").Attributes["content"].Value;
+
+                
+
                     reviewsArr.Add(new Review(rating, date));
                 }
 
                 i += 20;
-
                 //TODO Add return reviewsArr
             }
 
+           
             IEnumerable<Review> sortedEnum = reviewsArr.OrderBy(f=>f.Date, new DateComparator());
             IList<Review> sortedReviews = sortedEnum.ToList();
 
