@@ -29,18 +29,18 @@ namespace Lab01
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    { 
-         public int SelectedIndex = -1;
-         Timer timer;
-   
-    public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
-  //     public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
+    {
+        public int SelectedIndex = -1;
+        Timer timer;
+
+        // public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
+        public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
 
         //objects to JSON
         string NewsUri = @"https://newsapi.org/v2/everything?domains=bbc.co.uk&from=2019-03-25&to=2019-03-25&apiKey=55d4ae5d63ed4fafa486a113d6dbfae0";
         public int NewsCounter { get; set; } = 0;
-        public News.RootObject Root { get; set; } 
-        
+        public News.RootObject Root { get; set; }
+
         ObservableCollection<Person> people = new ObservableCollection<Person>
         {
             new Person { Name = "Jan", Surname = "Kowalski", Img = NonProfileImg + "Man2.jpeg" },
@@ -57,7 +57,7 @@ namespace Lab01
         {
             InitializeComponent();
             DataContext = this;
-           // GetJSON(); 
+            // GetJSON(); 
             this.MinWidth = 750;
             this.MinHeight = 500;
             YelpScraper scraper = new YelpScraper();
@@ -65,9 +65,13 @@ namespace Lab01
             CallAPI();
             timer = new Timer(3000);
             timer.Elapsed += FillRandomAsync;
-            
-            ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
 
+            ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
+            this.Height = Properties.Settings.Default.WindowHeight;
+            this.Width = Properties.Settings.Default.WindowWidth;
+            heightBox.Text = Convert.ToString(Properties.Settings.Default.WindowHeight);
+            widthBox.Text = Convert.ToString(Properties.Settings.Default.WindowWidth);
+            Closing += OnClosing;
         }
         //methods created special to JSON newsAPI 
         private async void CallAPI()
@@ -80,7 +84,7 @@ namespace Lab01
             dict.Add("latitude", "37.786882");
             dict.Add("longitude", "-122.399972");
             var rootObject = await yelpApi.GetJsonAsync(dict);
-            
+
             //SetUpArticle();
         }
         private void SetUpArticle()
@@ -91,7 +95,7 @@ namespace Lab01
                 return;
             }
 
-            Article.AppendText("Title: " + Environment.NewLine + Root.articles[NewsCounter].title + Environment.NewLine );
+            Article.AppendText("Title: " + Environment.NewLine + Root.articles[NewsCounter].title + Environment.NewLine);
             Article.AppendText("Description: " + Environment.NewLine + Root.articles[NewsCounter].description + Environment.NewLine + Environment.NewLine);
         }
         private void GetArticle_Click(object sender, RoutedEventArgs e)
@@ -100,31 +104,33 @@ namespace Lab01
             Article.Text = string.Empty;
             int amount = Convert.ToInt32(Amount.Text);
 
-            if ( amount < 20 && amount >0 )
+            if (amount < 20 && amount > 0)
             {
-                int newsNumber = 0; 
+                int newsNumber = 0;
 
                 for (int i = 1; i < amount; i++)
-                { newsNumber += 1;
+                {
+                    newsNumber += 1;
                     Article.AppendText("News nr: " + newsNumber + Environment.NewLine);
                     this.NewsCounter++;
                     SetUpArticle();
-                    Article.AppendText("____________________________"  + Environment.NewLine);
+                    Article.AppendText("____________________________" + Environment.NewLine);
                 }
-            } else if(amount >=20 )
+            }
+            else if (amount >= 20)
             {
                 Article.Text = string.Empty;
-                Article.Text = "You want too much!" + Environment.NewLine + "You can't get more than 19 news"; 
+                Article.Text = "You want too much!" + Environment.NewLine + "You can't get more than 19 news";
             }
-           else if(amount <=0)
+            else if (amount <= 0)
             {
                 Article.Text = string.Empty;
                 Article.Text = "Number must be more than 0";
             }
             NewsCounter = 0;
-          
+
         }
-        
+
 
         private void AddNewPersonButton_Click(object sender, RoutedEventArgs e)
         {
@@ -188,7 +194,7 @@ namespace Lab01
         private async void FillRandomAsync(object sender, ElapsedEventArgs e)
         {
             Progress<ProgresReport> progress = new Progress<ProgresReport>();
-            progress.ProgressChanged += ReportProgress; 
+            progress.ProgressChanged += ReportProgress;
 
             Tuple<String, String, String> person = await GetRandomPersonAsync(progress);
 
@@ -199,33 +205,33 @@ namespace Lab01
 
         private void ReportProgress(object sender, ProgresReport e)
         {
-             try
+            try
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     reportBar.Value = e.Percentage;
-                    progressInfo.Text = e.progressInfo; 
+                    progressInfo.Text = e.progressInfo;
                 });
             }
-            catch { } 
+            catch { }
         }
         private int CountPercentageProgress(int level, int levelCount)
         {
             return (level * 100) / levelCount;
         }
 
-        private async Task<Tuple<String,String,String>> GetRandomPersonAsync(IProgress<ProgresReport> progress)
-         {
+        private async Task<Tuple<String, String, String>> GetRandomPersonAsync(IProgress<ProgresReport> progress)
+        {
             ProgresReport report = new ProgresReport();
             int levelCount = 4;
 
             int startLevel = 1;
             String url = await GetImageWiki();
-            report.Percentage = CountPercentageProgress(startLevel,levelCount);
+            report.Percentage = CountPercentageProgress(startLevel, levelCount);
             report.progressInfo = "Conneting with Wikipedia and getting url";
             progress.Report(report);
 
-            startLevel += 1; 
+            startLevel += 1;
             Tuple<String, String> name = GetNameFromPage(url);
             report.Percentage = CountPercentageProgress(startLevel, levelCount);
             report.progressInfo = "Getting name of random 20th century Chancellor of Germany";
@@ -246,13 +252,13 @@ namespace Lab01
             Task.Delay(100).Wait();
 
             report.Percentage = 0;
-            report.progressInfo = timer.Enabled ? "Ready" : "Random content stopped"; 
-            progress.Report(report);  
-             
-                  
+            report.progressInfo = timer.Enabled ? "Ready" : "Random content stopped";
+            progress.Report(report);
+
+
             return randomPerson;
         }
-              
+
         private async Task<String> GetImageWiki()
         {
             String wiki = "https://en.wikipedia.org/wiki/Special:RandomInCategory/";
@@ -260,13 +266,13 @@ namespace Lab01
             Match compare;
             HttpWebRequest request;
             WebResponse response;
-           
+
             do
             {
                 request = (HttpWebRequest)WebRequest.Create(wiki + keyword);
                 request.AllowAutoRedirect = true;
                 request.Timeout = 10000;
-                response = await request.GetResponseAsync(); 
+                response = await request.GetResponseAsync();
                 String responseUri = response.ResponseUri.ToString();
                 response.Close();
 
@@ -287,19 +293,19 @@ namespace Lab01
 
             String result = "https://en.wikipedia.org/wiki/" + keyword;
             System.Diagnostics.Debug.Write("\n" + result + "\n");
- 
+
             return result;
         }
-    
+
         String GetImageFromPage(String url)
         {
             HtmlDocument doc = new HtmlWeb().Load(@url);
 
             if (doc != null)
             {
-               String imageUri = "https:" + doc.DocumentNode.SelectSingleNode("//tr//td[@colspan='2']//a//img").GetAttributeValue("src", "");
+                String imageUri = "https:" + doc.DocumentNode.SelectSingleNode("//tr//td[@colspan='2']//a//img").GetAttributeValue("src", "");
 
-               return imageUri;
+                return imageUri;
             }
             return String.Empty;
         }
@@ -318,7 +324,7 @@ namespace Lab01
 
                 return new Tuple<String, String>(name, surname);
             }
-       
+
             return new Tuple<String, String>(String.Empty, String.Empty);
         }
 
@@ -326,14 +332,30 @@ namespace Lab01
         {
             timer.Stop();
 
-            if(progressInfo.Text == "Ready")
-               progressInfo.Text = "Random content stopped";
+            if (progressInfo.Text == "Ready")
+                progressInfo.Text = "Random content stopped";
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             DatabasePage databasePage = new DatabasePage();
-            databasePage.ShowDialog(); 
+            databasePage.ShowDialog();
+        }
+
+        internal void OnClosing(object sender, CancelEventArgs e)
+        {
+            Properties.Settings.Default.WindowHeight = this.Height;
+            Properties.Settings.Default.WindowWidth = this.Width;
+            Properties.Settings.Default.Save();
+        }
+
+        private void SettingBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            Properties.Settings.Default.WindowHeight = Convert.ToDouble(heightBox.Text);
+            Properties.Settings.Default.WindowWidth = Convert.ToDouble(widthBox.Text);
+            this.Height = Properties.Settings.Default.WindowHeight;
+            this.Width = Properties.Settings.Default.WindowWidth;
         }
     }
 }
