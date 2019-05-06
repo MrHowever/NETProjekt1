@@ -67,6 +67,8 @@ namespace Lab01
             timer.Elapsed += FillRandomAsync;
 
             ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
+
+            //Settingsy
             this.Height = Properties.Settings.Default.WindowHeight;
             this.Width = Properties.Settings.Default.WindowWidth;
             heightBox.Text = Convert.ToString(Properties.Settings.Default.WindowHeight);
@@ -342,6 +344,7 @@ namespace Lab01
             databasePage.ShowDialog();
         }
 
+        //Settingsy
         internal void OnClosing(object sender, CancelEventArgs e)
         {
             Properties.Settings.Default.WindowHeight = this.Height;
@@ -351,7 +354,6 @@ namespace Lab01
 
         private void SettingBtn_Click(object sender, RoutedEventArgs e)
         {
-
             Properties.Settings.Default.WindowHeight = Convert.ToDouble(heightBox.Text);
             Properties.Settings.Default.WindowWidth = Convert.ToDouble(widthBox.Text);
             this.Height = Properties.Settings.Default.WindowHeight;
