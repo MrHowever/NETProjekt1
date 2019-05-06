@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Lab01
 {
-    class Chart
+    public class Chart
     {
         const String baseUrl = "https://chart.googleapis.com/chart?";
         const String chartType = "cht=lc";
@@ -19,7 +19,7 @@ namespace Lab01
         const String scaling = "chds=a";
         const String chartSize = "chs=600x480";
         const String axisRange = "chxr=1,0,5";
-
+        
         static public String CreateChart(IList<Review> reviews)
         {
             StringBuilder url = new StringBuilder(baseUrl);
@@ -54,6 +54,7 @@ namespace Lab01
             url.Remove(url.Length - 1, 1);
 
             int interval = reviews.Count / 6;
+            interval = interval == 0 ? 1 : interval;
             url.Append("&chxl=0:");
 
             for (int i = 0; i < reviews.Count; i += interval)

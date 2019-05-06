@@ -9,17 +9,25 @@ namespace Lab01
     public class Date
     {
         public int Year, Month, Day;
+
+        public Date()
+        {
+            Year = 0;
+            Month = 0;
+            Day = 0;
+        }
+
         public Date(String textDate)
         {
             var components = textDate.Split('-');
-            int.TryParse(components[0], out Year);
-            int.TryParse(components[1], out Month);
-            int.TryParse(components[2], out Day);
+            if (!(int.TryParse(components[0], out Year) && int.TryParse(components[1], out Month) &&
+                int.TryParse(components[2], out Day)))
+                    throw new ArgumentException();
         }
 
         public String toString()
         {
-            return Day + "-" + Month + "-" + Year;
+            return Day.ToString("D2") + "-" + Month.ToString("D2") + "-" + Year;
         }
     }
 

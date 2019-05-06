@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab01
 {
-    class YelpJSON
+    public class YelpJSON
     {
         public class RootObject
         {

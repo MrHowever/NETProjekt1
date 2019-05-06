@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace Lab01
 {
-    class Yelp
+    public class Yelp
     {
         private HttpClient client;
         private const String baseUri = @"https://api.yelp.com/v3/businesses/search?";
@@ -32,7 +32,7 @@ namespace Lab01
             "attributes"
         };
 
-        public Yelp()//
+        public Yelp()
         {
             client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "MrNJDxdn4NwNw0Q5qzeNLl8SpJvUmEv7zoZIj8MCA5FVjkUSCyqyjxlS8_qjzBQMVSZSy5SIGYentHW_0JbfZQEpoiu2LlOXdASfJtg9qKLbp2mn925tkOyPYZ6kXHYx");
@@ -58,22 +58,28 @@ namespace Lab01
 
         public async Task<YelpJSON.RootObject> GetJsonAsync(Dictionary<string,string> queryParams = null)
         {
+            if (queryParams == null)
+                throw new ArgumentNullException("At least one query param must be specified");
+
             StringBuilder stringBuilder = new StringBuilder(baseUri);
 
             foreach(var queryParam in queryParams)
             {
-                if (!isCorrect(queryParam.Key))
-                    throw new ArgumentException(String.Format("{0} is not a valid API parameter",queryParam.Key));
+                if (isCorrect(queryParam.Key))
+                {
+                    if (stringBuilder.ToString().Last<char>() != '?')
+                        stringBuilder.Append("&");
 
-                if (stringBuilder.ToString().Last<char>() != '?')
-                    stringBuilder.Append("&");
-
-                stringBuilder.Append(queryParam.Key + "=" + queryParam.Value);
+                    stringBuilder.Append(queryParam.Key + "=" + queryParam.Value);
+                }
             }
             
-            var Json = await GetResponseAsync("\n\n"+stringBuilder.ToString()+"\n\n");
-            
-            return JsonConvert.DeserializeObject<YelpJSON.RootObject>(Json);
+            var json = await GetResponseAsync("\n\n"+stringBuilder.ToString()+"\n\n");
+
+            if (json == null)
+                throw new FileNotFoundException("API returned null JSON object. Cannot proceed.");
+
+            return JsonConvert.DeserializeObject<YelpJSON.RootObject>(json);
         }
     }
 }

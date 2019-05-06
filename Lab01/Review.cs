@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 
 namespace Lab01
 {
-    class Review
+    public class Review
     {
         public Date Date;
         public double Rating;
 
         public Review(String rating, String date)
         {
-            double.TryParse(rating, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out Rating);
+            if(!double.TryParse(rating, out Rating))
+             if (!double.TryParse(rating, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out Rating))
+                throw new ArgumentException();
+
             Date = new Date(date);
         }
     }
