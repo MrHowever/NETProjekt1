@@ -37,7 +37,7 @@ namespace Lab01.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("850")]
+        [global::System.Configuration.DefaultSettingValueAttribute("830")]
         public double WindowHeight {
             get {
                 return ((double)(this["WindowHeight"]));

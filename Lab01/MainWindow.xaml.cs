@@ -71,7 +71,6 @@ namespace Lab01
             //Settingsy
             this.Height = Properties.Settings.Default.WindowHeight;
             this.Width = Properties.Settings.Default.WindowWidth;
-            heightBox.Text = Convert.ToString(Properties.Settings.Default.WindowHeight);
             widthBox.Text = Convert.ToString(Properties.Settings.Default.WindowWidth);
             Closing += OnClosing;
         }
@@ -347,16 +346,14 @@ namespace Lab01
         //Settingsy
         internal void OnClosing(object sender, CancelEventArgs e)
         {
-            Properties.Settings.Default.WindowHeight = this.Height;
             Properties.Settings.Default.WindowWidth = this.Width;
             Properties.Settings.Default.Save();
         }
 
         private void SettingBtn_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.WindowHeight = Convert.ToDouble(heightBox.Text);
+           
             Properties.Settings.Default.WindowWidth = Convert.ToDouble(widthBox.Text);
-            this.Height = Properties.Settings.Default.WindowHeight;
             this.Width = Properties.Settings.Default.WindowWidth;
         }
     }

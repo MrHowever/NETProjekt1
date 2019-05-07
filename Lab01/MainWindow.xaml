@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab01"
         mc:Ignorable="d"
-        Title="Profiles" Height="950" Width="1000">
+        Title="Profiles" Height="830" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -46,9 +46,7 @@
             <Button Content="Go to Database!" Margin="129,5,129.8,0" Click="Button_Click_1"/>
             <TextBlock TextWrapping="Wrap" Text="Width:"/>
             <TextBox Name="widthBox" Height="23" TextWrapping="Wrap" Text=""/>
-            <TextBlock TextWrapping="Wrap" Text="Height:"/>
-            <TextBox Name ="heightBox" Height="23" TextWrapping="Wrap" Text=""/>
-            <Button x:Name="settingBtn" Content="Set Width and Height of window" Margin="129,0,129.8,0" RenderTransformOrigin="0.517,2.284" Click="SettingBtn_Click" />
+            <Button x:Name="settingBtn" Content="Set Width of window" Margin="129,0,129.8,0" RenderTransformOrigin="0.517,2.284" Click="SettingBtn_Click" />
 
         </StackPanel>
     </Grid>
