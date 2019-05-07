@@ -47,6 +47,7 @@ namespace Lab01
                 catch(Exception ex)
                 {
                     Debug.WriteLine("The id is not unique!");
+                    throw; 
                 }
 
                 dataGrid.ItemsSource = _db.BusinessSpecifics.ToList();
@@ -75,6 +76,7 @@ namespace Lab01
                 {
                     _db.BusinessSpecifics.Remove(newYelp);
                     Debug.WriteLine("The id is not unique");
+                    throw; 
                 }
 
                 dataGrid.ItemsSource = _db.BusinessSpecifics.ToList();
@@ -113,7 +115,9 @@ namespace Lab01
             catch(Exception ex)
             {
                Debug.WriteLine("Cannot delete");
+                throw;
             }
+            
 
             myDataGrid.ItemsSource = _db.BusinessSpecifics.ToList();
 
