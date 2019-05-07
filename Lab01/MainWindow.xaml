@@ -46,7 +46,7 @@
             <Button Content="Go to Database!" Margin="129,5,129.8,0" Click="Button_Click_1"/>
             <TextBlock TextWrapping="Wrap" Text="Width:"/>
             <TextBox Name="widthBox" Height="23" TextWrapping="Wrap" Text=""/>
-            <Button x:Name="settingBtn" Content="Set Width of window" Margin="129,0,129.8,0" RenderTransformOrigin="0.517,2.284" Click="SettingBtn_Click" />
+            <Button x:Name="settingBtn" Content="Set Width of window" Margin="129,10,129.8,0" RenderTransformOrigin="0.517,2.284" Click="SettingBtn_Click" />
 
         </StackPanel>
     </Grid>
