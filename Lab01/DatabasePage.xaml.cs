@@ -57,33 +57,40 @@ namespace Lab01
             }
             else
             {
-                BusinessSpecifics newYelp = new BusinessSpecifics()
+                if (string.IsNullOrEmpty(nameTextBox.Text) || string.IsNullOrEmpty(priceTextBox.Text) || string.IsNullOrEmpty(cityTextBox.Text) || string.IsNullOrEmpty(ratingTextBox.Text) )
                 {
-                    name = nameTextBox.Text,
-                    rating = int.Parse(ratingTextBox.Text),
-                    price = priceTextBox.Text,
-                    city = cityTextBox.Text
-                };
-
-                
-                _db.BusinessSpecifics.Add(newYelp);
-
-                try
-                {
-                    _db.SaveChanges();
+                    throw new ArgumentException("All fields must be filled - check if name, price or city fields are empty");
+               
                 }
-                catch(Exception ex)
-                {
-                    _db.BusinessSpecifics.Remove(newYelp);
-                    Debug.WriteLine("The id is not unique");
-                    throw; 
-                }
+                else {
+                    BusinessSpecifics newYelp = new BusinessSpecifics()
+                    {
+                        name = nameTextBox.Text,
+                        rating = int.Parse(ratingTextBox.Text),
+                        price = priceTextBox.Text,
+                        city = cityTextBox.Text
+                    };
 
-                dataGrid.ItemsSource = _db.BusinessSpecifics.ToList();
-                nameTextBox.Text = string.Empty;
-                ratingTextBox.Text = string.Empty;
-                priceTextBox.Text = string.Empty;
-                cityTextBox.Text = string.Empty;
+                    _db.BusinessSpecifics.Add(newYelp);
+
+                    try
+                    {
+                        _db.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        _db.BusinessSpecifics.Remove(newYelp);
+                        Debug.WriteLine("The id is not unique");
+                        throw;
+                    }
+
+                    dataGrid.ItemsSource = _db.BusinessSpecifics.ToList();
+                    
+                    nameTextBox.Text = string.Empty;
+                    ratingTextBox.Text = string.Empty;
+                    priceTextBox.Text = string.Empty;
+                    cityTextBox.Text = string.Empty;
+                }
 
             }
 
@@ -93,6 +100,7 @@ namespace Lab01
         private void MyDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             int Id = (myDataGrid.SelectedItem as BusinessSpecifics).id;
+                       
             nameTextBox.Text = (myDataGrid.SelectedItem as BusinessSpecifics).name;
             ratingTextBox.Text = (myDataGrid.SelectedItem as BusinessSpecifics).rating.ToString();
             priceTextBox.Text = (myDataGrid.SelectedItem as BusinessSpecifics).price;
@@ -133,7 +141,7 @@ namespace Lab01
         {
             string startLetter = FirstLetter.Text;
             string costs = priceCheck.Text;
-
+           
             var result = _db.BusinessSpecifics.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(startLetter))
@@ -145,9 +153,10 @@ namespace Lab01
 
            
           if (!string.IsNullOrWhiteSpace(costs))
-            {
+           {
                 result = result.Where(x => x.price.Equals(costs));
-            }
+           } 
+           
             myDataGrid.ItemsSource = result.ToList();
         }
 
