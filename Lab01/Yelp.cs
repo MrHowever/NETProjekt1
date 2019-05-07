@@ -7,6 +7,10 @@ using System.Net.Http;
 using System.IO;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using Microsoft.Json.Schema.Validation;
+using Microsoft.Json.Schema;
+using Newtonsoft.Json.Schema;
+using Newtonsoft.Json.Linq;
 
 namespace Lab01
 {
@@ -14,6 +18,7 @@ namespace Lab01
     {
         private HttpClient client;
         private const String baseUri = @"https://api.yelp.com/v3/businesses/search?";
+        public JSchema schema;
         private IList<String> AvailableParams = new List<string>
         {
             "term",
@@ -36,6 +41,8 @@ namespace Lab01
         {
             client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "MrNJDxdn4NwNw0Q5qzeNLl8SpJvUmEv7zoZIj8MCA5FVjkUSCyqyjxlS8_qjzBQMVSZSy5SIGYentHW_0JbfZQEpoiu2LlOXdASfJtg9qKLbp2mn925tkOyPYZ6kXHYx");
+            String jsonSchema = File.ReadAllText(@"E:\Programming\VS\NETProjekt1\Lab01\YelpJSONSchema1.json", Encoding.UTF8);
+            schema = JSchema.Parse(jsonSchema);
         }
 
         private async Task<string> GetResponseAsync(String uri)
@@ -75,6 +82,12 @@ namespace Lab01
             }
             
             var json = await GetResponseAsync("\n\n"+stringBuilder.ToString()+"\n\n");
+            JObject jsonObj = JObject.Parse(@json);
+
+            System.Diagnostics.Debug.Write(json);
+
+            if (!jsonObj.IsValid(schema))
+                throw new FileNotFoundException("API has returned invalid JSON object. Cannot proceed.");
 
             if (json == null)
                 throw new FileNotFoundException("API returned null JSON object. Cannot proceed.");
