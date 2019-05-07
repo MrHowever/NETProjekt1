@@ -1,0 +1,178 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "total": {
+      "type": "integer"
+    },
+    "businesses": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "rating": {
+              "type": "number"
+            },
+            "price": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "alias": {
+              "type": "string"
+            },
+            "is_closed": {
+              "type": "boolean"
+            },
+            "categories": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "alias": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "alias",
+                    "title"
+                  ]
+                }
+              ]
+            },
+            "review_count": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "coordinates": {
+              "type": "object",
+              "properties": {
+                "latitude": {
+                  "type": "number"
+                },
+                "longitude": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "latitude",
+                "longitude"
+              ]
+            },
+            "image_url": {
+              "type": "string"
+            },
+            "location": {
+              "type": "object",
+              "properties": {
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "address2": {
+                  "type": "string"
+                },
+                "address3": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "address1": {
+                  "type": "string"
+                },
+                "zip_code": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "city",
+                "country",
+                "address2",
+                "address3",
+                "state",
+                "address1",
+                "zip_code"
+              ]
+            },
+            "distance": {
+              "type": "number"
+            },
+            "transactions": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "required": [
+            "rating",
+            "price",
+            "phone",
+            "id",
+            "alias",
+            "is_closed",
+            "categories",
+            "review_count",
+            "name",
+            "url",
+            "coordinates",
+            "image_url",
+            "location",
+            "distance",
+            "transactions"
+          ]
+        }
+      ]
+    },
+    "region": {
+      "type": "object",
+      "properties": {
+        "center": {
+          "type": "object",
+          "properties": {
+            "latitude": {
+              "type": "number"
+            },
+            "longitude": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "latitude",
+            "longitude"
+          ]
+        }
+      },
+      "required": [
+        "center"
+      ]
+    }
+  },
+  "required": [
+    "total",
+    "businesses",
+    "region"
+  ]
+}
