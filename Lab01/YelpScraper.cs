@@ -53,8 +53,8 @@ namespace Lab01
             Regex regex1 = new Regex(@"https:\/\/yelp\.pl\/biz\/.*");
             Regex regex2 = new Regex(@"https:\/\/s3-media3\.fl\.yelpcdn\.com\/bphoto\/.*\/.*\.jpg");
 
-            if (!regex1.IsMatch(baseUrl + bizPage) || !regex2.IsMatch(image))
-                throw new UriFormatException("Bussiness site or image Url hasn't been parsed correctly. Cannot proceed");
+         //   if (!regex1.IsMatch(baseUrl + bizPage) || !regex2.IsMatch(image))
+            //    throw new UriFormatException("Bussiness site or image Url hasn't been parsed correctly. Cannot proceed");
 
             return new Tuple<String, String,String>(name, image, baseUrl+bizPage);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,9 +38,17 @@ namespace Lab01
                 updateBS.name = nameTextBox.Text;
                 updateBS.rating = Convert.ToInt32(ratingTextBox.Text);
                 updateBS.price = priceTextBox.Text;
-                updateBS.city = cityTextBox.Text;  
+                updateBS.city = cityTextBox.Text;
 
-                _db.SaveChanges();
+                try
+                {
+                    _db.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+                    Debug.WriteLine("The id is not unique!");
+                }
+
                 dataGrid.ItemsSource = _db.BusinessSpecifics.ToList();
 
                 insertBtn.Content = "Insert";
@@ -50,14 +59,23 @@ namespace Lab01
                 BusinessSpecifics newYelp = new BusinessSpecifics()
                 {
                     name = nameTextBox.Text,
-                    rating = Convert.ToInt32(ratingTextBox.Text),
+                    rating = int.Parse(ratingTextBox.Text),
                     price = priceTextBox.Text,
                     city = cityTextBox.Text
                 };
 
                 
                 _db.BusinessSpecifics.Add(newYelp);
-                _db.SaveChanges();
+
+                try
+                {
+                    _db.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+                    _db.BusinessSpecifics.Remove(newYelp);
+                    Debug.WriteLine("The id is not unique");
+                }
 
                 dataGrid.ItemsSource = _db.BusinessSpecifics.ToList();
                 nameTextBox.Text = string.Empty;
@@ -87,7 +105,16 @@ namespace Lab01
             int Id = (myDataGrid.SelectedItem as BusinessSpecifics).id;
             var deleteBS = _db.BusinessSpecifics.Where(m => m.id == Id).Single();
             _db.BusinessSpecifics.Remove(deleteBS);
-            _db.SaveChanges();
+
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+               Debug.WriteLine("Cannot delete");
+            }
+
             myDataGrid.ItemsSource = _db.BusinessSpecifics.ToList();
 
             insertBtn.Content = "Insert";

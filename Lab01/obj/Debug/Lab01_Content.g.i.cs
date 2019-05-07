@@ -8,6 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("packages/nunit3testadapter.3.13.0/build/net35/nunit3.testadapter.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("packages/nunit3testadapter.3.13.0/build/net35/nunit3.testadapter.pdb")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("packages/nunit3testadapter.3.13.0/build/net35/nunit.engine.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("packages/nunit3testadapter.3.13.0/build/net35/nunit.engine.api.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("entitymodel.context.tt")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("entitymodel.tt")]
 
