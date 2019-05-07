@@ -108,3 +108,5 @@ C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01
 C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\MaterialDesignThemes.Wpf.dll
 C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\MaterialDesignThemes.Wpf.pdb
 C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\bin\Debug\MaterialDesignColors.pdb
+C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\obj\Debug\App.baml
