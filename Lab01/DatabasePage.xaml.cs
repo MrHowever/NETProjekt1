@@ -29,16 +29,30 @@ namespace Lab01
 
         private void InsertBtn_Click(object sender, RoutedEventArgs e)
         {
-           
+            if (string.IsNullOrEmpty(nameTextBox.Text) || string.IsNullOrEmpty(priceTextBox.Text) || string.IsNullOrEmpty(cityTextBox.Text) || string.IsNullOrEmpty(ratingTextBox.Text))
+            {
+                throw new ArgumentException("All fields must be filled - check if name, price or city fields are empty");
+
+            }
+
             if (index >= 0)
             {
                 BusinessSpecifics updateBS = (from m in _db.BusinessSpecifics
                                    where m.id == index
                                    select m).Single();
-                updateBS.name = nameTextBox.Text;
-                updateBS.rating = Convert.ToInt32(ratingTextBox.Text);
-                updateBS.price = priceTextBox.Text;
-                updateBS.city = cityTextBox.Text;
+              
+
+                if (updateBS == null)
+                {
+                    MessageBox.Show("This object cannot be updated");
+                }
+                else
+                {
+                    updateBS.name = nameTextBox.Text;
+                    updateBS.rating = int.Parse(ratingTextBox.Text);
+                    updateBS.price = priceTextBox.Text;
+                    updateBS.city = cityTextBox.Text;
+                }
 
                 try
                 {
@@ -57,12 +71,7 @@ namespace Lab01
             }
             else
             {
-                if (string.IsNullOrEmpty(nameTextBox.Text) || string.IsNullOrEmpty(priceTextBox.Text) || string.IsNullOrEmpty(cityTextBox.Text) || string.IsNullOrEmpty(ratingTextBox.Text) )
-                {
-                    throw new ArgumentException("All fields must be filled - check if name, price or city fields are empty");
                
-                }
-                else {
                     BusinessSpecifics newYelp = new BusinessSpecifics()
                     {
                         name = nameTextBox.Text,
@@ -71,7 +80,15 @@ namespace Lab01
                         city = cityTextBox.Text
                     };
 
-                    _db.BusinessSpecifics.Add(newYelp);
+                    if (newYelp == null)
+                    {
+                        MessageBox.Show("New object cannot be created");
+                    }
+                    else
+                    {
+                        _db.BusinessSpecifics.Add(newYelp);
+                    }
+
 
                     try
                     {
@@ -90,7 +107,7 @@ namespace Lab01
                     ratingTextBox.Text = string.Empty;
                     priceTextBox.Text = string.Empty;
                     cityTextBox.Text = string.Empty;
-                }
+                
 
             }
 
