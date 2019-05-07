@@ -16,25 +16,34 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1" Margin="20.2,20,19.6,20.4" Orientation="Vertical">
-            <TextBlock TextWrapping="Wrap" Text="Name" Margin="0,0,-0.2,0"/>
-            <TextBox x:Name ="nameTextBox" Height="23" TextWrapping="Wrap" Text="Mariusz" Margin="0,0,-0.2,10"/>
-            <TextBlock TextWrapping="Wrap" Text="Surname" Margin="0,0,-0.2,0"/>
-            <TextBox x:Name="ageTextBox" Height="23" TextWrapping="Wrap" Text="Mazur"  Margin="0,0,-0.2,10"/>
-            <Button x:Name="btnImg" Content="Search your image..." Margin="91,0,91,10" Click="BtnImg_Click" ClickMode="Press"/>
-            <Image x:Name="ImgPerson" Source="C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\nonprofile.png" Height="100" Margin="110,0" Stretch="Uniform" Width="80"/>
-            <TextBlock TextWrapping="Wrap" Text="Picture:"/>
-            <TextBox x:Name="Path" TextWrapping="Wrap"/>
-            <Button x:Name = "addNewPersonButton" Content="Add new person" Click="AddNewPersonButton_Click" Margin="91,10,91,0"/>
-            <Button x:Name="RandomButton" Content="Randomize content!" Margin="91,10,90.8,10" Click="Button_Click" />
+            <TextBlock x:Name="TermTitleBox" TextWrapping="Wrap" Text="Search term" Margin="0,0,-0.2,0" TextAlignment="Center"/>
+            <TextBox x:Name ="SearchTerm" Height="23" TextWrapping="Wrap" Margin="0,0,-0.2,10" TextAlignment="Center"/>
+            <TextBlock x:Name="LocationTitleBox" TextWrapping="Wrap" Text="Location" Margin="0,0,-0.2,0" TextAlignment="Center"/>
+            <TextBox x:Name="SearchLocation" Height="23" TextWrapping="Wrap"  Margin="0,0,-0.2,10" TextAlignment="Center"/>
+            <TextBlock x:Name="CheckBoxTitle" TextWrapping="Wrap" Text="Currently open" Margin="0,0,-0.2,0" TextAlignment="Center"/>
+            <CheckBox x:Name="IsOpenCheckBox" Content="" HorizontalAlignment="Center"/>
+            <Button x:Name="btnImg" Content="Look for a place..." Margin="91,10" Click="FindPlace" ClickMode="Press" IsCancel="True"/>
+            <Image x:Name="ImgLocation" Source="C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\nonprofile.png" Height="100" Margin="110,0" Stretch="Uniform" Width="80"/>
+            <TextBlock x:Name="LocationNameTitle" TextWrapping="Wrap" Text="Place:" TextAlignment="Center"/>
+            <TextBox x:Name="LocationName" TextWrapping="Wrap"/>
+            <TextBox x:Name="LocationLocation" TextWrapping="Wrap"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="0*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="NextPlaceButton" Content="Next place" Margin="0,454.76,18,-386.76" Click="NextPlace" HorizontalAlignment="Right" Height="Auto" Grid.Column="1"/>
+                <Button x:Name="PreviousPlaceButton" Content="Next place" Margin="0,454.76,0,-386.76" Click="PreviousPlace" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"/>
+            </Grid>
             <ProgressBar Height="5" Margin="10,5,9.8,5" Maximum="100" Minimum="0" x:Name ="reportBar"/>
             <TextBox x:Name="progressInfo" Height="22" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="2,0,-3.2,0" FlowDirection="RightToLeft" Width="458" HorizontalContentAlignment="Center"/>
-            <Button x:Name="RandomCancelButton" Content="Stop to randomize" Margin="91,10,90.8,10" Click="ButtonCancel_Click" />
-            <TextBox x:Name="Article" Height="63" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" Margin="0,0,-0.2,0"/>
-            <TextBox x:Name="Amount" Margin="0,5,0,0" Text="6"/>
-            <Button x:Name="GetArticle"  Margin="91,0,90.8,0" Content="Get articles" Click="GetArticle_Click"/>
             <Button Content="Go to Database!" Margin="129,5,129.8,0" Click="Button_Click_1"/>
             <TextBlock TextWrapping="Wrap" Text="Width:"/>
-            <TextBox Name="widthBox" Height="23" TextWrapping="Wrap" Text=""/>
+            <TextBox x:Name="widthBox" Height="23" TextWrapping="Wrap" Text=""/>
             <Button x:Name="settingBtn" Content="Set Width of window" Margin="129,10,129.8,0" RenderTransformOrigin="0.517,2.284" Click="SettingBtn_Click" />
 
         </StackPanel>

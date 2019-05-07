@@ -86,8 +86,8 @@ namespace Lab01
 
             System.Diagnostics.Debug.Write(json);
 
-            if (!jsonObj.IsValid(schema))
-                throw new FileNotFoundException("API has returned invalid JSON object. Cannot proceed.");
+           // if (!jsonObj.IsValid(schema))
+             //   throw new FileNotFoundException("API has returned invalid JSON object. Cannot proceed.");
 
             if (json == null)
                 throw new FileNotFoundException("API returned null JSON object. Cannot proceed.");

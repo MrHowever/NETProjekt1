@@ -34,6 +34,8 @@ namespace Lab01
     {
         public int SelectedIndex = -1;
         System.Timers.Timer timer;
+        YelpJSON.RootObject currentBusinesses = null;
+        int currentIndex = 0;
 
         public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
         //public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
@@ -68,7 +70,7 @@ namespace Lab01
             timer.Elapsed += ImageAnimation;
             timer.Start();
 
-            ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
+            //ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
             PlaceImage.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
             PlaceImage.Stretch = Stretch.Fill;
             
@@ -115,6 +117,82 @@ namespace Lab01
             );
         }
 
+        private async void FindPlace(object sender, RoutedEventArgs e)
+        {
+            String term = SearchTerm.Text;
+            String location = SearchLocation.Text;
+            bool opened = (bool) IsOpenCheckBox.IsChecked;
+            Dictionary<String, String> dict = new Dictionary<String, String>
+            {
+                {"term",term},
+                {"location",location},
+                {"open_now",opened.ToString()}
+            };
+
+            Yelp yelpApi = new Yelp();
+            var rootObject = await yelpApi.GetJsonAsync(dict);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            ImgLocation.Source = new BitmapImage(new Uri(rootObject.businesses[0].image_url))
+            );
+
+            Application.Current.Dispatcher.Invoke(() =>
+            LocationName.Text = rootObject.businesses[0].name
+            );
+
+            Application.Current.Dispatcher.Invoke(() =>
+            LocationLocation.Text = rootObject.businesses[0].location.city + ", " +
+                                    rootObject.businesses[0].location.country + ", " +
+                                    rootObject.businesses[0].location.address1
+                                    );
+
+            currentBusinesses = rootObject;
+        }
+
+        private void PreviousPlace(object sender, RoutedEventArgs e)
+        {
+            if (currentBusinesses != null)
+            {
+                currentIndex = (currentIndex - 1) % (currentBusinesses.total > 1000 ? 999 : currentBusinesses.total - 1);
+
+                Application.Current.Dispatcher.Invoke(() =>
+            ImgLocation.Source = new BitmapImage(new Uri(currentBusinesses.businesses[currentIndex].image_url))
+            );
+
+                Application.Current.Dispatcher.Invoke(() =>
+                LocationName.Text = currentBusinesses.businesses[currentIndex].name
+                );
+
+                Application.Current.Dispatcher.Invoke(() =>
+                LocationLocation.Text = currentBusinesses.businesses[currentIndex].location.city + ", " +
+                                        currentBusinesses.businesses[currentIndex].location.country + ", " +
+                                        currentBusinesses.businesses[currentIndex].location.address1
+                                        );
+            }
+        }
+
+        private void NextPlace(object sender, RoutedEventArgs e)
+        {
+            if(currentBusinesses != null)
+            {
+                currentIndex = (currentIndex + 1) % (currentBusinesses.total > 1000 ? 999 : currentBusinesses.total - 1);
+
+                Application.Current.Dispatcher.Invoke(() =>
+            ImgLocation.Source = new BitmapImage(new Uri(currentBusinesses.businesses[currentIndex].image_url))
+            );
+
+                Application.Current.Dispatcher.Invoke(() =>
+                LocationName.Text = currentBusinesses.businesses[currentIndex].name
+                );
+
+                Application.Current.Dispatcher.Invoke(() =>
+                LocationLocation.Text = currentBusinesses.businesses[currentIndex].location.city + ", " +
+                                        currentBusinesses.businesses[currentIndex].location.country + ", " +
+                                        currentBusinesses.businesses[currentIndex].location.address1
+                                        );
+            }
+        }
+
         //methods created special to JSON newsAPI 
         private async void CallAPI()
         {
@@ -129,6 +207,7 @@ namespace Lab01
             var rootObject = await yelpApi.GetJsonAsync(dict);
             //SetUpArticle();
         }
+        /*
         private void SetUpArticle()
         {
             if (Root.articles.Length <= NewsCounter)
@@ -377,7 +456,7 @@ namespace Lab01
             if (progressInfo.Text == "Ready")
                 progressInfo.Text = "Random content stopped";
         }
-
+        */
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             DatabasePage databasePage = new DatabasePage();
@@ -397,5 +476,8 @@ namespace Lab01
             Properties.Settings.Default.WindowWidth = Convert.ToDouble(widthBox.Text);
             this.Width = Properties.Settings.Default.WindowWidth;
         }
+
+       
     }
+    
 }
