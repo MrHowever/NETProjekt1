@@ -191,7 +191,6 @@
       <DependentUpon>EntityModel.edmx</DependentUpon>
       <LastGenOutput>EntityModel.cs</LastGenOutput>
     </Content>
-    <None Include="YelpJSONSchema1.json" />
     <None Include="YelpJSONSchema.json" />
   </ItemGroup>
   <ItemGroup>

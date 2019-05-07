@@ -30,12 +30,12 @@ namespace Lab01
             };
         }
 
-        public Tuple<String,String,String> GetRandomPlace()
+        async public Task<Tuple<String,String,String>> GetRandomPlace()
         {
             String randomPlace = locations[new Random().Next() % locations.Count()];
             int randomPage = new Random().Next() % 10;  //TODO add a check for maximum page count and use it instead of hardcoded value
 
-            HtmlDocument page = new HtmlWeb().Load(@"https://www.yelp.pl/search?find_desc=&find_loc=" + randomPlace + "&ns=1&start=" + randomPage);
+            HtmlDocument page = await new HtmlWeb().LoadFromWebAsync(@"https://www.yelp.pl/search?find_desc=&find_loc=" + randomPlace + "&ns=1&start=" + randomPage);
             if (page == null)
                 throw new UriFormatException("Randomly generated is invalid. Cannot proceed.");
 
@@ -53,8 +53,8 @@ namespace Lab01
             Regex regex1 = new Regex(@"https:\/\/yelp\.pl\/biz\/.*");
             Regex regex2 = new Regex(@"https:\/\/s3-media3\.fl\.yelpcdn\.com\/bphoto\/.*\/.*\.jpg");
 
-         //   if (!regex1.IsMatch(baseUrl + bizPage) || !regex2.IsMatch(image))
-            //    throw new UriFormatException("Bussiness site or image Url hasn't been parsed correctly. Cannot proceed");
+           // if (!regex1.IsMatch(baseUrl + bizPage) || !regex2.IsMatch(image))
+             //   throw new UriFormatException("Bussiness site or image Url hasn't been parsed correctly. Cannot proceed");
 
             return new Tuple<String, String,String>(name, image, baseUrl+bizPage);
         }

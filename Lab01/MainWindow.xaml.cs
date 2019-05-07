@@ -21,6 +21,8 @@ using System.Text.RegularExpressions;
 using System.Timers;
 using System.Windows.Threading;
 using System.ComponentModel;
+using System.Windows.Media.Animation;
+using System.Threading;
 
 
 namespace Lab01
@@ -31,7 +33,7 @@ namespace Lab01
     public partial class MainWindow : Window
     {
         public int SelectedIndex = -1;
-        Timer timer;
+        System.Timers.Timer timer;
 
         public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
         //public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
@@ -60,24 +62,59 @@ namespace Lab01
             // GetJSON(); 
             this.MinWidth = 750;
             this.MinHeight = 500;
-            //YelpScraper scraper = new YelpScraper();
-            //scraper.GetRandomPlace();
-
-           
-
-
+    
             CallAPI();
-            timer = new Timer(3000);
-            timer.Elapsed += FillRandomAsync;
+            timer = new System.Timers.Timer(15000);
+            timer.Elapsed += ImageAnimation;
+            timer.Start();
 
             ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
-
+            PlaceImage.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
+            PlaceImage.Stretch = Stretch.Fill;
+            
             //Settingsy
             this.Height = Properties.Settings.Default.WindowHeight;
             this.Width = Properties.Settings.Default.WindowWidth;
             widthBox.Text = Convert.ToString(Properties.Settings.Default.WindowWidth);
             Closing += OnClosing;
         }
+
+        private async void ImageAnimation(object sender, ElapsedEventArgs e)
+        {
+            YelpScraper scraper = new YelpScraper();
+            var randomPlace = await scraper.GetRandomPlace();
+
+            Application.Current.Dispatcher.Invoke(() =>
+                PlaceImage.BeginAnimation(OpacityProperty, new DoubleAnimation
+                {
+                    From = 1,
+                    To = 0,
+                    Duration = new Duration(TimeSpan.FromSeconds(3)),
+                    EasingFunction = new ExponentialEase()
+                })
+            );
+
+            Thread.Sleep(3500);
+
+            Application.Current.Dispatcher.Invoke(() =>
+              PlaceImage.Source = new BitmapImage(new Uri(randomPlace.Item2))
+              );
+
+            Application.Current.Dispatcher.Invoke(() =>
+                PlaceImage.BeginAnimation(OpacityProperty, new DoubleAnimation
+                {
+                    From = 0,
+                    To = 1,
+                    Duration = new Duration(TimeSpan.FromSeconds(3)),
+                    EasingFunction = new ExponentialEase()                  
+                })
+            );
+
+            Application.Current.Dispatcher.Invoke(() =>
+                PlaceName.Text = randomPlace.Item1  
+            );
+        }
+
         //methods created special to JSON newsAPI 
         private async void CallAPI()
         {

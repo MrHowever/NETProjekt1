@@ -15,17 +15,6 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListBox Margin="20,20,19.8,20.4" ItemsSource="{Binding Items}" MouseDoubleClick="ListBox_MouseDoubleClick">
-            <ListBox.ItemTemplate >
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Path=Name}" Width="100" Padding="0,0,5,15"/>
-                        <TextBlock Text="{Binding Path=Surname}" Width="150" Padding="0,0,5,15" />
-                        <Image Source="{Binding Path=Img}" Height="80" Width="60"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
         <StackPanel Grid.Column="1" Margin="20.2,20,19.6,20.4" Orientation="Vertical">
             <TextBlock TextWrapping="Wrap" Text="Name" Margin="0,0,-0.2,0"/>
             <TextBox x:Name ="nameTextBox" Height="23" TextWrapping="Wrap" Text="Mariusz" Margin="0,0,-0.2,10"/>
@@ -49,5 +38,7 @@
             <Button x:Name="settingBtn" Content="Set Width of window" Margin="129,10,129.8,0" RenderTransformOrigin="0.517,2.284" Click="SettingBtn_Click" />
 
         </StackPanel>
+        <Image x:Name="PlaceImage" HorizontalAlignment="Left" Height="326" Margin="46,161,0,0" VerticalAlignment="Top" Width="408"/>
+        <TextBlock x:Name="PlaceName" Margin="93.355,559,51.355,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="13.96" TextAlignment="Center"/>
     </Grid>
 </Window>
