@@ -37,8 +37,8 @@ namespace Lab01
         YelpJSON.RootObject currentBusinesses = null;
         int currentIndex = 0;
 
-        //public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
-        public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
+        public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
+        //public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
 
         //objects to JSON
         string NewsUri = @"https://newsapi.org/v2/everything?domains=bbc.co.uk&from=2019-03-25&to=2019-03-25&apiKey=55d4ae5d63ed4fafa486a113d6dbfae0";
@@ -64,7 +64,9 @@ namespace Lab01
             // GetJSON(); 
             this.MinWidth = 750;
             this.MinHeight = 500;
-    
+
+            RatingsChart.Source = new BitmapImage(new Uri(NonProfileImg + "Man2.jpeg"));
+            
             CallAPI();
             timer = new System.Timers.Timer(15000);
             timer.Elapsed += ImageAnimation;
@@ -130,7 +132,24 @@ namespace Lab01
             };
 
             Yelp yelpApi = new Yelp();
-            var rootObject = await yelpApi.GetJsonAsync(dict);
+
+            YelpJSON.RootObject rootObject;
+            try
+            {
+                rootObject = await yelpApi.GetJsonAsync(dict);
+            }
+            catch
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                    LocationName.Text = "Invalid search parameters"
+                    );
+
+                Application.Current.Dispatcher.Invoke(() =>
+                LocationLocation.Text = ""
+                );
+
+                return;
+            }
 
             Application.Current.Dispatcher.Invoke(() =>
             ImgLocation.Source = new BitmapImage(new Uri(rootObject.businesses[0].image_url))
@@ -477,7 +496,29 @@ namespace Lab01
             this.Width = Properties.Settings.Default.WindowWidth;
         }
 
-       
+        private async void ShowRatings(object sender, RoutedEventArgs e)
+        {
+            if(currentBusinesses != null)
+            {
+                
+                YelpScraper scraper = new YelpScraper();
+                String bizUrl = currentBusinesses.businesses[currentIndex].url;
+                bizUrl = bizUrl.Split('?')[0];
+                System.Diagnostics.Debug.Write("\n\n\n"+bizUrl+"\n\n\n");
+                IList<Review> reviews = await scraper.GetReviews(currentBusinesses.businesses[currentIndex].url);
+                
+                RatingsChart.Source = new BitmapImage(new Uri(
+                    Chart.CreateChart(reviews)
+                    ));
+                    
+                RatingsPopup.IsOpen = true;
+            }
+        }
+
+        private void ClosePopup(object sender, MouseButtonEventArgs e)
+        {
+            RatingsPopup.IsOpen = false;
+        }
     }
     
 }

@@ -41,7 +41,8 @@ namespace Lab01
         {
             client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "MrNJDxdn4NwNw0Q5qzeNLl8SpJvUmEv7zoZIj8MCA5FVjkUSCyqyjxlS8_qjzBQMVSZSy5SIGYentHW_0JbfZQEpoiu2LlOXdASfJtg9qKLbp2mn925tkOyPYZ6kXHYx");
-            String jsonSchema = File.ReadAllText(@"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\YelpJSONSchema.json", Encoding.UTF8);
+            //String jsonSchema = File.ReadAllText(@"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\YelpJSONSchema.json", Encoding.UTF8);
+            String jsonSchema = File.ReadAllText(@"E:\Programming\VS\NETProjekt1\Lab01\YelpJSONSchema.json", Encoding.UTF8);
             schema = JSchema.Parse(jsonSchema);
         }
 
@@ -86,8 +87,8 @@ namespace Lab01
 
             System.Diagnostics.Debug.Write(json);
 
-           // if (!jsonObj.IsValid(schema))
-             //   throw new FileNotFoundException("API has returned invalid JSON object. Cannot proceed.");
+           if (!jsonObj.IsValid(schema))
+               throw new FileNotFoundException("API has returned invalid JSON object. Cannot proceed.");
 
             if (json == null)
                 throw new FileNotFoundException("API returned null JSON object. Cannot proceed.");

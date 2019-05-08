@@ -59,13 +59,13 @@ namespace Lab01
             return new Tuple<String, String,String>(name, image, baseUrl+bizPage);
         }
 
-        public IList<Review> GetReviews(String url)
+        public async Task<IList<Review>> GetReviews(String url)
         {
             IList<Review> reviewsArr = new List<Review>();
             int reviewCounter = 0;
-            while (true)
+            while (reviewCounter <= 40)
             {
-                HtmlDocument page = new HtmlWeb().Load(url+"?start="+reviewCounter);
+                HtmlDocument page = await new HtmlWeb().LoadFromWebAsync(url+"?start="+reviewCounter);
                 var reviews = page.DocumentNode.SelectNodes("//div[@itemprop='review']");
 
                 if (reviews == null)    //No more reviews to be loaded

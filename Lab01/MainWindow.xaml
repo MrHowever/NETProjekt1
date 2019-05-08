@@ -31,11 +31,11 @@
             <CheckBox x:Name="IsOpenCheckBox" Content="" HorizontalAlignment="Center"/>
             <Button x:Name="btnImg" Margin="91,10" Click="FindPlace" ClickMode="Press" IsCancel="True">
                 <Grid Width="200">
-                <materialDesign:PackIcon Kind="Place" VerticalAlignment="Center" />
-                <TextBlock Text="LOOK FOR A PLACE..." HorizontalAlignment="Center"  />
-         </Grid>
-    </Button>
-    <Image x:Name="ImgLocation" Source="C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\nonprofile.png" Height="100" Margin="110,0" Stretch="Uniform" Width="80"/>
+                    <materialDesign:PackIcon Kind="Place" VerticalAlignment="Center" />
+                    <TextBlock Text="LOOK FOR A PLACE..." HorizontalAlignment="Center"  />
+                </Grid>
+            </Button>
+            <Image x:Name="ImgLocation" Source="C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\nonprofile.png" Height="100" Margin="110,0" Stretch="Uniform" Width="80"/>
             <TextBlock x:Name="LocationNameTitle" TextWrapping="Wrap" Text="Place:" TextAlignment="Center"/>
             <TextBox x:Name="LocationName" TextWrapping="Wrap"/>
             <TextBox x:Name="LocationLocation" TextWrapping="Wrap"/>
@@ -46,7 +46,12 @@
                         <TextBlock Text="Previous place" HorizontalAlignment="Center"  />
                     </Grid>
                 </Button>
-                <Button x:Name="NextPlaceButton"  Margin="135,34,0,34" Click="NextPlace" HorizontalAlignment="Right" Height="32" HorizontalContentAlignment="Right" Width="156">
+                <Button x:Name="PreviousPlaceButton_Copy" Click="ShowRatings" Height="32" Margin="20,34,0,34" RenderTransformOrigin="-0.704,0.945" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="100" HorizontalAlignment="Right">
+                    <Grid Width="150">
+                        <TextBlock Text="Rating" HorizontalAlignment="Center" Margin="0,0,80,0"  />
+                    </Grid>
+                </Button>
+                <Button x:Name="NextPlaceButton"  Margin="20,34,0,34" Click="NextPlace" HorizontalAlignment="Right" Height="32" HorizontalContentAlignment="Right" Width="156">
                     <Grid Width="150">
                         <materialDesign:PackIcon Kind="NextTitle" VerticalAlignment="Center" />
                         <TextBlock Text="Next place" HorizontalAlignment="Center"  />
@@ -73,5 +78,10 @@
         </StackPanel>
         <Image x:Name="PlaceImage" HorizontalAlignment="Left" Height="326" Margin="46,161,0,0" VerticalAlignment="Top" Width="430"/>
         <TextBlock x:Name="PlaceName" Margin="69,505,75,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="14" TextAlignment="Center" RenderTransformOrigin="0.514,-3.367"/>
+        <Popup x:Name="RatingsPopup" Width="640" Height="480" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Placement="Center" MouseLeftButtonDown="ClosePopup">
+            <Grid Height="480" Width="640" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image x:Name="RatingsChart" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </Popup>
     </Grid>
 </Window>
