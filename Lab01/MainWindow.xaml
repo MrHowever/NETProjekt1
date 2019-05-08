@@ -40,6 +40,6 @@
 
         </StackPanel>
         <Image x:Name="PlaceImage" HorizontalAlignment="Left" Height="326" Margin="46,161,0,0" VerticalAlignment="Top" Width="408"/>
-        <TextBlock x:Name="PlaceName" Margin="93.355,559,51.355,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="13.96" TextAlignment="Center"/>
+        <TextBlock x:Name="PlaceName" Margin="66.355,503,78.355,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="13.96" TextAlignment="Center" RenderTransformOrigin="0.514,-3.367"/>
     </Grid>
 </Window>

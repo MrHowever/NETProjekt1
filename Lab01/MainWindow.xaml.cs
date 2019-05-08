@@ -70,8 +70,8 @@ namespace Lab01
             timer.Elapsed += ImageAnimation;
             timer.Start();
 
-            //ImgPerson.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
-            PlaceImage.Source = new BitmapImage(new Uri(NonProfileImg + "nonprofile.png"));
+            ImageAnimation(null,null);
+
             PlaceImage.Stretch = Stretch.Fill;
             
             //Settingsy
