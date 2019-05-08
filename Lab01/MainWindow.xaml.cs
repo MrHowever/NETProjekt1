@@ -153,7 +153,7 @@ namespace Lab01
         {
             if (currentBusinesses != null)
             {
-                currentIndex = (currentIndex - 1) % (currentBusinesses.total > 1000 ? 999 : currentBusinesses.total - 1);
+                currentIndex = currentIndex == 0 ? 10 : currentIndex-1;
 
                 Application.Current.Dispatcher.Invoke(() =>
             ImgLocation.Source = new BitmapImage(new Uri(currentBusinesses.businesses[currentIndex].image_url))
@@ -175,7 +175,7 @@ namespace Lab01
         {
             if(currentBusinesses != null)
             {
-                currentIndex = (currentIndex + 1) % (currentBusinesses.total > 1000 ? 999 : currentBusinesses.total - 1);
+                currentIndex = currentIndex == 10 ? 0 : currentIndex+1;
 
                 Application.Current.Dispatcher.Invoke(() =>
             ImgLocation.Source = new BitmapImage(new Uri(currentBusinesses.businesses[currentIndex].image_url))
