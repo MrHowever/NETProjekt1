@@ -29,21 +29,46 @@
             <TextBox x:Name="SearchLocation" Height="23" TextWrapping="Wrap"  Margin="0,0,-0.2,10" TextAlignment="Center"/>
             <TextBlock x:Name="CheckBoxTitle" TextWrapping="Wrap" Text="Currently open" Margin="0,0,-0.2,0" TextAlignment="Center"/>
             <CheckBox x:Name="IsOpenCheckBox" Content="" HorizontalAlignment="Center"/>
-            <Button x:Name="btnImg" Content="Look for a place..." Margin="91,10" Click="FindPlace" ClickMode="Press" IsCancel="True"/>
-            <Image x:Name="ImgLocation" Source="C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\nonprofile.png" Height="100" Margin="110,0" Stretch="Uniform" Width="80"/>
+            <Button x:Name="btnImg" Margin="91,10" Click="FindPlace" ClickMode="Press" IsCancel="True">
+                <Grid Width="200">
+                <materialDesign:PackIcon Kind="Place" VerticalAlignment="Center" />
+                <TextBlock Text="LOOK FOR A PLACE..." HorizontalAlignment="Center"  />
+         </Grid>
+    </Button>
+    <Image x:Name="ImgLocation" Source="C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\nonprofile.png" Height="100" Margin="110,0" Stretch="Uniform" Width="80"/>
             <TextBlock x:Name="LocationNameTitle" TextWrapping="Wrap" Text="Place:" TextAlignment="Center"/>
             <TextBox x:Name="LocationName" TextWrapping="Wrap"/>
             <TextBox x:Name="LocationLocation" TextWrapping="Wrap"/>
             <StackPanel Height="100" Orientation="Horizontal" HorizontalAlignment="Center" Margin="18,0,0,0" Width="470">
-                <Button x:Name="PreviousPlaceButton" Content="Previous place" Click="PreviousPlace" Height="32" Margin="0" RenderTransformOrigin="-0.704,0.945" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left"/>
-                <Button x:Name="NextPlaceButton" Content="Next place" Margin="230,34,0,34" Click="NextPlace" HorizontalAlignment="Right" Height="32" HorizontalContentAlignment="Right" Width="106"/>
+                <Button x:Name="PreviousPlaceButton" Click="PreviousPlace" Height="32" Margin="0,34" RenderTransformOrigin="-0.704,0.945" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Width="166">
+                    <Grid Width="150">
+                        <materialDesign:PackIcon Kind="PreviousTitle" VerticalAlignment="Center" />
+                        <TextBlock Text="Previous place" HorizontalAlignment="Center"  />
+                    </Grid>
+                </Button>
+                <Button x:Name="NextPlaceButton"  Margin="135,34,0,34" Click="NextPlace" HorizontalAlignment="Right" Height="32" HorizontalContentAlignment="Right" Width="156">
+                    <Grid Width="150">
+                        <materialDesign:PackIcon Kind="NextTitle" VerticalAlignment="Center" />
+                        <TextBlock Text="Next place" HorizontalAlignment="Center"  />
+                    </Grid>
+                </Button>
             </StackPanel>
             <ProgressBar Height="5" Margin="10,5,9.8,5" Maximum="100" Minimum="0" x:Name ="reportBar"/>
             <TextBox x:Name="progressInfo" Height="22" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="2,0,-3.2,0" FlowDirection="RightToLeft" Width="458" HorizontalContentAlignment="Center"/>
-            <Button Content="Go to Database!" Margin="129,5,129.8,0" Click="Button_Click_1"/>
+            <Button Margin="129,5,129.8,0" Click="Button_Click_1">
+                <Grid Width="120">
+                    <materialDesign:PackIcon Kind="Database" VerticalAlignment="Center" />
+                    <TextBlock Text="DATABASE" HorizontalAlignment="Center"  />
+                </Grid>
+            </Button>
             <TextBlock TextWrapping="Wrap" Text="Width:"/>
             <TextBox x:Name="widthBox" Height="23" TextWrapping="Wrap" Text=""/>
-            <Button x:Name="settingBtn" Content="Set Width of window" Margin="129,10,129.8,0" RenderTransformOrigin="0.517,2.284" Click="SettingBtn_Click" />
+            <Button x:Name="settingBtn" Margin="129,10,129.8,0" RenderTransformOrigin="0.517,2.284" Click="SettingBtn_Click" >
+                <Grid Width="120">
+                    <materialDesign:PackIcon Kind="Settings" VerticalAlignment="Center" />
+                    <TextBlock Text="SETTINGS" HorizontalAlignment="Center"  />
+                </Grid>
+            </Button>
 
         </StackPanel>
         <Image x:Name="PlaceImage" HorizontalAlignment="Left" Height="326" Margin="46,161,0,0" VerticalAlignment="Top" Width="430"/>
