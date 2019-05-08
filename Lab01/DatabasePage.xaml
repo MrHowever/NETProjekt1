@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab01"
         mc:Ignorable="d"
-        Title="DatabasePage" Height="450" Width="800">
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     Title="DatabasePage" Height="508.285" Width="785.143">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="11*"/>
             <RowDefinition Height="409*"/>
         </Grid.RowDefinitions>
         <DockPanel Margin="0,0,-0.4,0" Grid.RowSpan="2" >
-            <DataGrid x:Name="myDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ColumnWidth="*" Margin="0,0,0,228" MouseDoubleClick="MyDataGrid_MouseDoubleClick" >
+            <DataGrid x:Name="myDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ColumnWidth="*" Margin="0,0,0,218.8" MouseDoubleClick="MyDataGrid_MouseDoubleClick" >
                 <DataGrid.Columns>
 
                     <DataGridTextColumn Header="Name" Binding="{Binding name}" />
@@ -25,22 +26,22 @@
             </DataGrid>
 
         </DockPanel>
-        <Button Margin="47,328.8,634.6,48" Name="insertBtn" Content="Insert"  RenderTransformOrigin="0.492,-0.82" Grid.Row="1" Click="InsertBtn_Click"/>
-        <Button Margin="179,328.8,502.6,48" Name="deleteBtn" Content="Delete"  RenderTransformOrigin="0.492,-0.82" Grid.Row="1" Click="DeleteBtn_Click"/>
-        <Button Margin="505,362.8,76.6,10" Name="selectBtn" Content="Select" Grid.Row="1" Click="SelectBtn_Click"  />
-        <TextBox Name="FirstLetter" Margin="444,329.132,195.6,51" FontSize="16" Grid.Row="1"/>
-        <TextBlock HorizontalAlignment="Left" Margin="444,307.132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="229" Text="Select by first letter of name" Grid.Row="1"/>
+        <Button Margin="47,377,634.2,43.8" Name="insertBtn" Content="Insert"  RenderTransformOrigin="0.492,-0.82" Grid.Row="1" Click="InsertBtn_Click"/>
+        <Button Margin="177,377,504.2,43.8" Name="deleteBtn" Content="Delete"  RenderTransformOrigin="0.492,-0.82" Grid.Row="1" Click="DeleteBtn_Click"/>
+        <Button Margin="487,377,94.2,43.8" Name="selectBtn" Content="Select" Grid.Row="1" Click="SelectBtn_Click"  />
+        <TextBox Name="FirstLetter" Margin="393,304,201.2,113.8" FontSize="16" Grid.Row="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="393,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="229" Text="Select by first letter of name" Grid.Row="1"/>
 
-        <TextBox Name="priceCheck" Margin="630,328.8,9.6,51" FontSize="16" Grid.Row="1"/>
-        <TextBlock HorizontalAlignment="Left" Margin="630,306.8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="154" Text="Select by price " Grid.Row="1"/>
+        <TextBox Name="priceCheck" Margin="592,304,22.2,113.8" FontSize="16" Grid.Row="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="622,276,-16.8,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="154" Text="Select by price " Grid.Row="1"/>
 
-        <TextBox Name="nameTextBox" Margin="102,200.132,556.6,178" Grid.Row="1" />
-        <TextBlock HorizontalAlignment="Left" Margin="47,214.132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="37" Text="Name:" Grid.Row="1"/>
-        <TextBox Name="ratingTextBox" Margin="102,231.132,556.6,149" RenderTransformOrigin="0.509,0.453" Grid.Row="1" />
-        <TextBlock HorizontalAlignment="Left" Margin="47,243.132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="37" Text="Rating:" Grid.Row="1"/>
-        <TextBox Name="priceTextBox" Margin="102,260.132,556.6,121" RenderTransformOrigin="0.509,0.453" Grid.Row="1" />
-        <TextBlock HorizontalAlignment="Left" Margin="47,271.132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="37" Text="Price:" Grid.Row="1"/>
-        <TextBox Name="cityTextBox" Margin="102,288.132,556.6,98" RenderTransformOrigin="0.57,1.282" Grid.Row="1" />
-        <TextBlock HorizontalAlignment="Left" Margin="47,294.132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="37" Text="City:" Grid.Row="1"/>
+        <TextBox Name="nameTextBox" Margin="105,234.2,552.4,189.4" Grid.Row="1" />
+        <TextBlock HorizontalAlignment="Left" Margin="47,259,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="37" Text="Name:" Grid.Row="1"/>
+        <TextBox Name="ratingTextBox" Margin="105,263.2,552.4,161.4" RenderTransformOrigin="0.509,0.453" Grid.Row="1" />
+        <TextBlock HorizontalAlignment="Left" Margin="47,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="37" Text="Rating:" Grid.Row="1"/>
+        <TextBox Name="priceTextBox" Margin="105,291.2,552.4,133.4" RenderTransformOrigin="0.509,0.453" Grid.Row="1" />
+        <TextBlock HorizontalAlignment="Left" Margin="47,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="37" Text="Price:" Grid.Row="1"/>
+        <TextBox Name="cityTextBox" Margin="105,319.2,552.4,105.4" RenderTransformOrigin="0.57,1.282" Grid.Row="1" />
+        <TextBlock HorizontalAlignment="Left" Margin="47,343,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="37" Text="City:" Grid.Row="1" RenderTransformOrigin="0.337,1.55"/>
     </Grid>
 </Window>

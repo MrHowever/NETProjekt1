@@ -37,8 +37,8 @@ namespace Lab01
         YelpJSON.RootObject currentBusinesses = null;
         int currentIndex = 0;
 
-        public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
-        //public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
+        //public static string NonProfileImg = @"E:\Programming\VS\NETProjekt1\Lab01\Images\"; 
+        public static string NonProfileImg = @"C:\Users\Waldemar\Desktop\Platormy Programistyczne .NET i JAVA\NETProjekt1\Lab01\Images\";
 
         //objects to JSON
         string NewsUri = @"https://newsapi.org/v2/everything?domains=bbc.co.uk&from=2019-03-25&to=2019-03-25&apiKey=55d4ae5d63ed4fafa486a113d6dbfae0";
@@ -75,7 +75,7 @@ namespace Lab01
             PlaceImage.Stretch = Stretch.Fill;
             
             //Settingsy
-            this.Height = Properties.Settings.Default.WindowHeight;
+           // this.Height = Properties.Settings.Default.WindowHeight;
             this.Width = Properties.Settings.Default.WindowWidth;
             widthBox.Text = Convert.ToString(Properties.Settings.Default.WindowWidth);
             Closing += OnClosing;
