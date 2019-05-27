@@ -42,10 +42,10 @@ public class KeyHandler implements KeyListener
                 }
                 break;
             case KeyEvent.VK_SPACE:
-                GameClock.sleepTime = GameClock.sleepTime + 100;
+                GameClock.sleepTime = GameClock.sleepTime - 100;
                 break;
             case KeyEvent.VK_BACK_SPACE:
-                GameClock.sleepTime = GameClock.sleepTime - 100;
+                GameClock.sleepTime = GameClock.sleepTime + 100;
                 break;
         }
     }

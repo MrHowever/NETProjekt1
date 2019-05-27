@@ -6,7 +6,7 @@ import game.Snake;
 public class GameClock extends Thread
 {
     public static boolean running = true;
-    public static int sleepTime = 600;
+    public static int sleepTime = 200;
 
     public void run()
     {
