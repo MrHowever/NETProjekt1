@@ -7,7 +7,8 @@ public class Gui
     Draw d;
 
     public static int width = 800, height = 600;
-public static int xoff = 130, yoff = 20;
+    public static int xoff = 130, yoff = 20;
+
     public void create()
     {
         jf = new JFrame("Snake");
