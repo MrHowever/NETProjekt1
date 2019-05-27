@@ -12,6 +12,8 @@ public class Snake
     public static Head head = new Head(7,7);
     public static ArrayList<Tail> tails = new ArrayList<>();
 
+    public static PickUp pickup = new PickUp();
+
     public static void addTail()
     {
         if(tails.size() < 1)
@@ -50,13 +52,13 @@ public class Snake
                 head.setX(head.getX() + 1);
                 break;
             case UP:
-                head.setX(head.getY() - 1);
+                head.setY(head.getY() - 1);
                 break;
             case LEFT:
                 head.setX(head.getX() - 1);
                 break;
             case DOWN:
-                head.setX(head.getY() + 1);
+                head.setY(head.getY() + 1);
                 break;
 
         }

@@ -30,6 +30,11 @@ public class Draw extends JLabel
         p = Snake.ptc(Snake.head.getX(),Snake.head.getY());
         g.fillRect(p.x, p.y,32,32 );
 
+        //Draw PickUp
+        g.setColor(new Color(204, 71, 100));
+        p = Snake.ptc(Snake.pickup.getX(), Snake.head.getY());
+        g.fillRect(p.x, p.y, 32,32);
+
         //Draw Grid
         g.setColor(Color.DARK_GRAY);
         for(int i = 0; i < 16; i++)
