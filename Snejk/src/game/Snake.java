@@ -1,5 +1,8 @@
 package game;
 
+import GUI.Gui;
+
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Snake
@@ -25,4 +28,13 @@ public class Snake
 
     }
 
+    //Position to Coordinates 
+    public static Point ptc(int x, int y)
+    {
+    Point p =  new Point(0,0);
+    p.x = x * 32 + Gui.xoff;
+    p.y = y * 32 + Gui.yoff;
+
+    return p;
+    }
 }

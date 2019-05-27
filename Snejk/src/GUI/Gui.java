@@ -1,5 +1,8 @@
 package GUI;
+import actions.KeyHandler;
+
 import javax.swing.*;
+import java.awt.event.KeyListener;
 
 public class Gui
 {
@@ -16,6 +19,7 @@ public class Gui
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jf.setLayout(null);
         jf.setResizable(false);
+        jf.addKeyListener(new KeyHandler());
 
         d = new Draw();
         d.setBounds(0,0,width,height);

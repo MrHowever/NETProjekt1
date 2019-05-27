@@ -11,6 +11,6 @@ public class Main
         GameClock gc = new GameClock();
 
         g.create();
-        gc.start(); 
+        gc.start();
     }
 }
