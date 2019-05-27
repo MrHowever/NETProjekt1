@@ -24,11 +24,45 @@ public class Snake
     }
 
     public static void move(){
+        //Move Tails
+        if(tails.size() >=2){
+            for(int i = tails.size()-1; i>=1;  i--){
+                if(tails.get(i).isWait()){
+                    tails.get(i).setWait(false);
+                }else {
+                    tails.get(i).setX(tails.get(i-1).getX());
+                    tails.get(i).setY(tails.get(i-1).getY());
+                }
+            }
+        }
+        //Move first Tal to Head
+        if(tails.size()>=1){
+            if(tails.get(0).isWait()){
+                tails.get(0).setWait(false);
+            }else {
+                tails.get(0).setX(head.getX());
+                tails.get(0).setY(head.getY());
+            }
+        }
+        //Move Head
+        switch(head.getDir()){
+            case RIGHT:
+                head.setX(head.getX() + 1);
+                break;
+            case UP:
+                head.setX(head.getY() - 1);
+                break;
+            case LEFT:
+                head.setX(head.getX() - 1);
+                break;
+            case DOWN:
+                head.setX(head.getY() + 1);
+                break;
 
-
+        }
     }
 
-    //Position to Coordinates 
+    //Position to Coordinates
     public static Point ptc(int x, int y)
     {
     Point p =  new Point(0,0);
