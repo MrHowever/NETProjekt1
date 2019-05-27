@@ -1,5 +1,6 @@
 package actions;
 
+import clocks.GameClock;
 import game.Dir;
 import game.Snake;
 
@@ -40,6 +41,12 @@ public class KeyHandler implements KeyListener
                     Snake.waitToMove = true;
                 }
                 break;
+            case KeyEvent.VK_SPACE:
+                GameClock.sleepTime = GameClock.sleepTime + 100;
+                break;
+            case KeyEvent.VK_BACK_SPACE:
+                GameClock.sleepTime = GameClock.sleepTime - 100;
+                break; 
         }
     }
 
