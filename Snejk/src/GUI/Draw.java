@@ -21,12 +21,12 @@ public class Draw extends JLabel
         //Draw Snake Tails
         g.setColor(new Color(179,204, 111));
         for(int i = 0; i < Snake.tails.size(); i++){
-            p = Snake.ptc(Snake.tails.get(i).getX(),Snake.tails.get(i).getY())
+            p = Snake.ptc(Snake.tails.get(i).getX(),Snake.tails.get(i).getY());
             g.fillRect(p.x, p.y, 32, 32 );
         }
 
         //Draw Snake Head
-        g.setColor((new Color(156, 204, 0));
+        g.setColor((new Color(156, 204, 0)));
         p = Snake.ptc(Snake.head.getX(),Snake.head.getY());
         g.fillRect(p.x, p.y,32,32 );
 
