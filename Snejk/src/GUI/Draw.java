@@ -32,7 +32,7 @@ public class Draw extends JLabel
 
         //Draw PickUp
         g.setColor(new Color(204, 71, 100));
-        p = Snake.ptc(Snake.pickup.getX(), Snake.head.getY());
+        p = Snake.ptc(Snake.pickup.getX(), Snake.pickup.getY());
         g.fillRect(p.x, p.y, 32,32);
 
         //Draw Grid
@@ -49,6 +49,10 @@ public class Draw extends JLabel
         g.setColor(Color.DARK_GRAY);
         g.drawRect(Gui.xoff, Gui.yoff, 512, 512);
 
+        //Draw Score
+        g.setFont((new Font("Serif", Font.BOLD, 20)));
+        g.drawString("Score: "+Snake.score, 6,25);
+        g.drawString("Best: "+Snake.bestscore, 660, 25);
         repaint();
     }
 }

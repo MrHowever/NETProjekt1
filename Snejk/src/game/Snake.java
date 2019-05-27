@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class Snake
 {
+    public static int score = 0, bestscore = 0;
     public static boolean waitToMove = false;
 
     public static Head head = new Head(7,7);
