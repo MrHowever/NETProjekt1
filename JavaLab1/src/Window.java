@@ -23,13 +23,19 @@ public class Window extends JFrame{
                 int y1 = generator.nextInt(screenSize.height-60);
 
                 Rectangle startingPosition = button1.getBounds();
-                int xOffset = (x1 - startingPosition.x)/100;
-                int yOffset = (y1 - startingPosition.y)/100;
+
+                int xOffset = (x1 - startingPosition.x);
+                int yOffset = (y1 - startingPosition.y);
+                double length = Math.sqrt(Math.pow(xOffset,2) + Math.pow(yOffset,2));
+
+                double normalizedX = xOffset/length;
+                double normalizedY = yOffset/length;
 
                 new Thread(() -> {
-                    for(int i = 0; i < 100; i++) {
+                    while(button1.getBounds().x != x1 && button1.getBounds().y != y1) {
                         Rectangle currentPosition = button1.getBounds();
-                        button1.setBounds(currentPosition.x + xOffset, currentPosition.y + yOffset, 100, 60);
+
+                        button1.setBounds((int)Math.round(currentPosition.x + normalizedX), (int)Math.round(currentPosition.y + normalizedY), 100, 60);
                         revalidate();
                         repaint();
 
@@ -41,15 +47,7 @@ public class Window extends JFrame{
 
                         }
                     }
-                   /* for(int i = 0; i < 100; i++) {
-                        button1.setBounds(currentPosition.x+(xOffset*(i/100)),
-                                currentPosition.y+(yOffset*(i/100)),100,60);
-
-                        repaint();
-                    }*/
                 }).start();
-
-                //button1.setBounds(x1,y1,100,60);
             }
         });
 
