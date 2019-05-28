@@ -21,7 +21,35 @@ public class Window extends JFrame{
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 int x1 = generator.nextInt(screenSize.width-100);
                 int y1 = generator.nextInt(screenSize.height-60);
-                button1.setBounds(x1,y1,100,60);
+
+                Rectangle startingPosition = button1.getBounds();
+                int xOffset = (x1 - startingPosition.x)/100;
+                int yOffset = (y1 - startingPosition.y)/100;
+
+                new Thread(() -> {
+                    for(int i = 0; i < 100; i++) {
+                        Rectangle currentPosition = button1.getBounds();
+                        button1.setBounds(currentPosition.x + xOffset, currentPosition.y + yOffset, 100, 60);
+                        revalidate();
+                        repaint();
+
+                        try {
+                            Thread.sleep(10);
+                        }
+                        catch(InterruptedException exception)
+                        {
+
+                        }
+                    }
+                   /* for(int i = 0; i < 100; i++) {
+                        button1.setBounds(currentPosition.x+(xOffset*(i/100)),
+                                currentPosition.y+(yOffset*(i/100)),100,60);
+
+                        repaint();
+                    }*/
+                }).start();
+
+                //button1.setBounds(x1,y1,100,60);
             }
         });
 
