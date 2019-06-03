@@ -1,22 +1,48 @@
 package game;
 
 import GUI.Gui;
+import clocks.GameClock;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Snake
 {
-    public static int score = 0, bestscore = 0;
     public static boolean waitToMove = false;
 
-    public static Head head = new Head(7,7);
-    public static ArrayList<Tail> tails = new ArrayList<>();
+    public int ID;
 
-    public static PickUp pickup = new PickUp();
+    public  Head head = new Head(7,7);
+    public  ArrayList<Tail> tails = new ArrayList<>();
 
-    public static void addTail()
+    public Snake(int id)
     {
+        ID = id;
+    }
+
+    public void addTail()
+    {
+        int lastX = tails.isEmpty() ? head.getX() : tails.get(tails.size()-1).getX();
+        int lastY = tails.isEmpty() ? head.getY() : tails.get(tails.size()-1).getY();
+
+        switch(head.getDir()) {
+            case RIGHT:
+                lastX -= 1;
+                break;
+            case UP:
+                lastY += 1;
+                break;
+            case LEFT:
+                lastX += 1;
+                break;
+            case DOWN:
+                lastY -= 1;
+                break;
+        }
+
+        tails.add(new Tail(lastX,lastY));
+
+        /*
         if(tails.size() < 1)
         {
             tails.add(new Tail(head.getX(), head.getY()));
@@ -24,9 +50,11 @@ public class Snake
         {
             tails.add(new Tail(tails.get(tails.size()-1).x, tails.get(tails.size()-1).y));
         }
+        */
+
     }
 
-    public static void move(){
+    public void move(){
         //Move Tails
         if(tails.size() >=2){
             for(int i = tails.size()-1; i>=1;  i--){
@@ -65,13 +93,44 @@ public class Snake
         }
     }
 
+    public  boolean collideWall(){
+        return (head.getX() < 0 || head.getX() > 15 || head.getY() <0 || head.getY() > 15);
+
+    }
+
+    //TODO own score
+
+    public  void collidePickUp(){
+        if(head.getX()== GameClock.pickup.getX() && head.getY() == GameClock.pickup.getY()){
+            addTail();
+            Scoreboard.scores.set(ID,Scoreboard.scores.get(ID)+1);
+            if(Scoreboard.scores.get(ID) > Scoreboard.bestscore) Scoreboard.bestscore = Scoreboard.scores.get(ID);
+
+            GameClock.createPickup();
+        }
+    }
+
+    public boolean collideSnake(Snake anotherSnake)
+    {
+        for(int i = 0; i < anotherSnake.tails.size(); i++) {
+            if(anotherSnake.tails.get(i).collision(head.getX(),head.getY())) {
+                return true;
+            }
+        }
+
+        if(anotherSnake.head.collision(head.getX(),head.getY()) && anotherSnake != this)
+            return true;
+
+        return false;
+    }
+
     //Position to Coordinates
     public static Point ptc(int x, int y)
     {
-    Point p =  new Point(0,0);
-    p.x = x * 32 + Gui.xoff;
-    p.y = y * 32 + Gui.yoff;
+        Point p =  new Point(0,0);
+        p.x = x * 32 + Gui.xoff;
+        p.y = y * 32 + Gui.yoff;
 
-    return p;
+        return p;
     }
 }

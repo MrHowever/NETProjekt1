@@ -2,6 +2,7 @@ package actions;
 
 import clocks.GameClock;
 import game.Dir;
+import game.Scoreboard;
 import game.Snake;
 
 import java.awt.event.KeyEvent;
@@ -18,31 +19,69 @@ public class KeyHandler implements KeyListener
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode()){
             case KeyEvent.VK_W:
-                if(!(Snake.head.getDir()== Dir.DOWN) && !Snake.waitToMove) {
-                    Snake.head.setDir(Dir.UP);
+                if(!(GameClock.snakes.get(0).head.getDir()== Dir.DOWN) && !Snake.waitToMove) {
+                    GameClock.snakes.get(0).head.setDir(Dir.UP);
                     Snake.waitToMove = true;
                 }
                 break;
             case KeyEvent.VK_A:
-                if(!(Snake.head.getDir()== Dir.RIGHT) && !Snake.waitToMove) {
-                    Snake.head.setDir(Dir.LEFT);
+                if(!(GameClock.snakes.get(0).head.getDir()== Dir.RIGHT) && !Snake.waitToMove) {
+                    GameClock.snakes.get(0).head.setDir(Dir.LEFT);
                     Snake.waitToMove = true;
                 }
                 break;
             case KeyEvent.VK_S:
-                if(!(Snake.head.getDir()== Dir.UP) && !Snake.waitToMove) {
-                    Snake.head.setDir(Dir.DOWN);
+                if(!(GameClock.snakes.get(0).head.getDir()== Dir.UP) && !Snake.waitToMove) {
+                    GameClock.snakes.get(0).head.setDir(Dir.DOWN);
                     Snake.waitToMove = true;
                 }
                 break;
             case KeyEvent.VK_D:
-                if(!(Snake.head.getDir()== Dir.LEFT) && !Snake.waitToMove) {
-                    Snake.head.setDir(Dir.RIGHT);
+                if(!(GameClock.snakes.get(0).head.getDir()== Dir.LEFT) && !Snake.waitToMove) {
+                    GameClock.snakes.get(0).head.setDir(Dir.RIGHT);
                     Snake.waitToMove = true;
                 }
                 break;
+            case KeyEvent.VK_RIGHT:
+                if(GameClock.snakes.size() > 1) {
+                    if (!(GameClock.snakes.get(1).head.getDir() == Dir.LEFT) && !Snake.waitToMove) {
+                        GameClock.snakes.get(1).head.setDir(Dir.RIGHT);
+                        Snake.waitToMove = true;
+                    }
+                }
+                break;
+            case KeyEvent.VK_UP:
+                if(GameClock.snakes.size() > 1) {
+                    if (!(GameClock.snakes.get(1).head.getDir() == Dir.DOWN) && !Snake.waitToMove) {
+                        GameClock.snakes.get(1).head.setDir(Dir.UP);
+                        Snake.waitToMove = true;
+                    }
+                }
+                break;
+            case KeyEvent.VK_LEFT:
+                if(GameClock.snakes.size() > 1) {
+                    if (!(GameClock.snakes.get(1).head.getDir() == Dir.RIGHT) && !Snake.waitToMove) {
+                        GameClock.snakes.get(1).head.setDir(Dir.LEFT);
+                        Snake.waitToMove = true;
+                    }
+                }
+                break;
+            case KeyEvent.VK_DOWN:
+                if(GameClock.snakes.size() > 1) {
+                    if (!(GameClock.snakes.get(1).head.getDir() == Dir.UP) && !Snake.waitToMove) {
+                        GameClock.snakes.get(1).head.setDir(Dir.DOWN);
+                        Snake.waitToMove = true;
+                    }
+                }
+                break;
+
+            case KeyEvent.VK_N:
+                GameClock.snakes.add(new Snake(GameClock.snakes.size()));
+                Scoreboard.scores.add(0);
+                break;
             case KeyEvent.VK_SPACE:
-                GameClock.sleepTime = GameClock.sleepTime - 100;
+                if(GameClock.sleepTime > 100)
+                    GameClock.sleepTime = GameClock.sleepTime - 100;
                 break;
             case KeyEvent.VK_BACK_SPACE:
                 GameClock.sleepTime = GameClock.sleepTime + 100;

@@ -1,13 +1,11 @@
 package game;
 
-public class Head
+public class Head extends Collidable
 {
     Dir dir = Dir.RIGHT;
-    int x, y;
 
     public Head(int x, int y) {
-        this.x = x;
-        this.y = y;
+        super(x,y);
     }
 
     public Dir getDir() {
@@ -16,21 +14,5 @@ public class Head
 
     public void setDir(Dir dir) {
         this.dir = dir;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 }

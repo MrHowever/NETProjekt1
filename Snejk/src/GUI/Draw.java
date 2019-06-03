@@ -1,4 +1,6 @@
 package GUI;
+import clocks.GameClock;
+import game.Scoreboard;
 import game.Snake;
 
 import javax.swing.*;
@@ -18,21 +20,23 @@ public class Draw extends JLabel
         g.setColor(Color.PINK);
         g.fillRect(0, 0, Gui.width, Gui.height);
 
-        //Draw Snake Tails
-        g.setColor(new Color(179,204, 111));
-        for(int i = 0; i < Snake.tails.size(); i++){
-            p = Snake.ptc(Snake.tails.get(i).getX(),Snake.tails.get(i).getY());
-            g.fillRect(p.x, p.y, 32, 32 );
-        }
+        for(Snake snake : GameClock.snakes) {
+            //Draw Snake Tails
+            g.setColor(new Color(179, 204, 111));
+            for (int i = 0; i < snake.tails.size(); i++) {
+                p = Snake.ptc(snake.tails.get(i).getX(), snake.tails.get(i).getY());
+                g.fillRect(p.x, p.y, 32, 32);
+            }
 
-        //Draw Snake Head
-        g.setColor((new Color(156, 204, 0)));
-        p = Snake.ptc(Snake.head.getX(),Snake.head.getY());
-        g.fillRect(p.x, p.y,32,32 );
+            //Draw Snake Head
+            g.setColor((new Color(156, 204, 0)));
+            p = Snake.ptc(snake.head.getX(), snake.head.getY());
+            g.fillRect(p.x, p.y, 32, 32);
+        }
 
         //Draw PickUp
         g.setColor(new Color(204, 71, 100));
-        p = Snake.ptc(Snake.pickup.getX(), Snake.pickup.getY());
+        p = Snake.ptc(GameClock.pickup.getX(), GameClock.pickup.getY());
         g.fillRect(p.x, p.y, 32,32);
 
         //Draw Grid
@@ -51,8 +55,12 @@ public class Draw extends JLabel
 
         //Draw Score
         g.setFont((new Font("Serif", Font.BOLD, 20)));
-        g.drawString("Score: "+Snake.score, 6,25);
-        g.drawString("Best: "+Snake.bestscore, 660, 25);
+        g.drawString("Score 1: "+ Scoreboard.scores.get(0), 6,25);
+
+        for(int i = 1; i < Scoreboard.scores.size(); i++)
+            g.drawString("Score " + (i+1) + ": "+Scoreboard.scores.get(i),6,25 + 25*i);
+
+        g.drawString("Best: "+Scoreboard.bestscore, 660, 25);
         repaint();
     }
 }
