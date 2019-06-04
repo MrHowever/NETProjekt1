@@ -6,14 +6,19 @@ import clocks.GameClock;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static game.Dir.*;
+
 public class Snake
 {
     public static boolean waitToMove = false;
+    public boolean aiContrrolled = false;
 
     public int ID;
 
     public  Head head = new Head(7,7);
     public  ArrayList<Tail> tails = new ArrayList<>();
+
+    public AI snakeAI = new AI(this);
 
     public Snake(int id)
     {
@@ -41,20 +46,26 @@ public class Snake
         }
 
         tails.add(new Tail(lastX,lastY));
-
-        /*
-        if(tails.size() < 1)
-        {
-            tails.add(new Tail(head.getX(), head.getY()));
-        }else
-        {
-            tails.add(new Tail(tails.get(tails.size()-1).x, tails.get(tails.size()-1).y));
-        }
-        */
-
     }
 
     public void move(){
+
+        if(aiContrrolled)
+        {
+            snakeAI.initGrid(this);
+            AI.Pair move = snakeAI.aiMove(snakeAI.AStar());
+
+            if(move.x == 1)
+                head.setDir(RIGHT);
+            else if( move.x == -1)
+                head.setDir(LEFT);
+            else if(move.y == 1)
+                head.setDir(DOWN);
+            else if(move.y == -1)
+                head.setDir(UP);
+        }
+
+
         //Move Tails
         if(tails.size() >=2){
             for(int i = tails.size()-1; i>=1;  i--){

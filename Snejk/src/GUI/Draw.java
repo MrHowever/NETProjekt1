@@ -34,6 +34,13 @@ public class Draw extends JLabel
             g.fillRect(p.x, p.y, 32, 32);
         }
 
+        //Draw obstacle
+        g.setColor(new Color(0, 0, 100));
+        for (int i = 0; i < GameClock.obstacle.segments.size(); i++) {
+            p = Snake.ptc(GameClock.obstacle.segments.get(i).getX(), GameClock.obstacle.segments.get(i).getY());
+            g.fillRect(p.x, p.y, 32, 32);
+        }
+
         //Draw PickUp
         g.setColor(new Color(204, 71, 100));
         p = Snake.ptc(GameClock.pickup.getX(), GameClock.pickup.getY());
