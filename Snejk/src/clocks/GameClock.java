@@ -1,6 +1,5 @@
 package clocks;
 
-import actions.Collision;
 import game.*;
 
 import java.util.ArrayList;
@@ -9,11 +8,12 @@ import java.util.Arrays;
 public class GameClock extends Thread
 {
     public static boolean running = true;
-    public static int sleepTime = 500;
-    public static PickUp pickup = new Frog();
+    public static int sleepTime = 100;
     public static ArrayList<Snake> snakes = new ArrayList<Snake>(Arrays.asList(new Snake(0)));
-    public static Obstacle obstacle = new MovingObstacle();
-    public static AI ai = new AI(snakes.get(0));
+    public static Obstacle obstacle = new BlinkingObstacle();
+    public static PickUp pickup = new SpeedUp();
+    public static long deathAt = 0;
+    public static long obstacleWait = 2000000000;
 
     public void run()
     {
@@ -24,8 +24,9 @@ public class GameClock extends Thread
 
                 for (Snake snake : snakes) {
                     snake.move();
-                    Snake.waitToMove = false;
                     snake.collidePickUp();
+
+                    Snake.waitToMove = false;
 
                     for(Snake differentSnake : snakes) {
                         if (snake.collideSnake(differentSnake)) {
@@ -36,8 +37,15 @@ public class GameClock extends Thread
                         }
                     }
 
+                    if (snake.collideWall()) {
+                        snake.tails.clear();
+                        snake.head.setX(7);
+                        snake.head.setY(7);
+                        Scoreboard.scores.set(snake.ID,0);
+                    }
 
-                    if (snake.collideWall() || obstacle.collision(snake.head.getX(),snake.head.getY())) {
+                    if(obstacle.collision(snake.head.getX(),snake.head.getY()))
+                    {
                         snake.tails.clear();
                         snake.head.setX(7);
                         snake.head.setY(7);
@@ -46,13 +54,11 @@ public class GameClock extends Thread
                 }
 
                 pickup.action();
-                obstacle.action();
+
+                if(obstacle.alive)
+                    obstacle.action();
 
                 createObstacle();
-
-                ai.initGrid(snakes.get(0));
-                ai.AStar();
-
             }catch (InterruptedException e){
                 e.printStackTrace();
             }
@@ -61,29 +67,42 @@ public class GameClock extends Thread
 
     static public void createObstacle()
     {
-        double randomVal = Math.random();
+        if(!obstacle.alive && deathAt == 0) {
+            deathAt = System.nanoTime();
+        }
 
-        if(randomVal > 0.7 && obstacle.segments.size() == 0)
-        {
-            obstacle = new MovingObstacle();
+        if(!obstacle.alive && ((System.nanoTime() - deathAt) > obstacleWait)) {
+           int randInt = (int) Math.round(Math.random()*2);
+
+                switch(randInt) {
+                    case 0:
+                        obstacle = new MovingObstacle();
+                        break;
+                    case 1:
+                        obstacle = new StaticObstacle();
+                        break;
+                    case 2:
+                        obstacle = new BlinkingObstacle();
+                        break;
+            }
+
+            deathAt = 0;
         }
     }
 
     static public void createPickup()
     {
-        int randomVal = (int) (Math.round(Math.random())*2);
+        int randomVal = (int) (Math.round(Math.random()*30));
 
-        switch(randomVal)
-        {
-            case 0:
-                pickup = new StaticPickup();
-                break;
-            case 1:
-                pickup = new Frog();
-                break;
-            case 2:
-                pickup = new Berries();
-                break;
-        }
+        if(randomVal <= 9)
+            pickup = new StaticPickup();
+        else if(randomVal <= 18)
+            pickup = new Frog();
+        else if(randomVal <= 27)
+            pickup = new Berries();
+        else if(randomVal <= 29)
+            pickup = new SpeedUp();
+        else if(randomVal <= 30)
+            pickup = new SlowDown();
     }
 }

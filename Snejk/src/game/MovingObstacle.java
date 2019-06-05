@@ -49,5 +49,8 @@ public class MovingObstacle extends Obstacle
             segments.add(new Tail(segments.get(segments.size()-1).getX() -xOffset,
                     segments.get(segments.size()-1).getY() - yOffset));
         }
+
+        if(segments.isEmpty())
+            alive = false;
     }
 }

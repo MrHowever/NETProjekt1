@@ -15,8 +15,11 @@ public class Snake
 
     public int ID;
 
+
     public  Head head = new Head(7,7);
     public  ArrayList<Tail> tails = new ArrayList<>();
+
+    public int prevX = head.getX(),prevY = head.getY();
 
     public AI snakeAI = new AI(this);
 
@@ -27,25 +30,7 @@ public class Snake
 
     public void addTail()
     {
-        int lastX = tails.isEmpty() ? head.getX() : tails.get(tails.size()-1).getX();
-        int lastY = tails.isEmpty() ? head.getY() : tails.get(tails.size()-1).getY();
-
-        switch(head.getDir()) {
-            case RIGHT:
-                lastX -= 1;
-                break;
-            case UP:
-                lastY += 1;
-                break;
-            case LEFT:
-                lastX += 1;
-                break;
-            case DOWN:
-                lastY -= 1;
-                break;
-        }
-
-        tails.add(new Tail(lastX,lastY));
+        tails.add(new Tail(prevX,prevY));
     }
 
     public void move(){
@@ -55,16 +40,22 @@ public class Snake
             snakeAI.initGrid(this);
             AI.Pair move = snakeAI.aiMove(snakeAI.AStar());
 
-            if(move.x == 1)
+            if(move.x == 1) {
                 head.setDir(RIGHT);
-            else if( move.x == -1)
+            }
+                else if( move.x == -1) {
                 head.setDir(LEFT);
-            else if(move.y == 1)
+                }
+            else if(move.y == 1) {
                 head.setDir(DOWN);
-            else if(move.y == -1)
+            }
+            else if(move.y == -1) {
                 head.setDir(UP);
+            }
         }
 
+        prevX = tails.size() == 0 ? head.getX() : tails.get(tails.size()-1).getX();
+        prevY = tails.size() == 0 ? head.getY() : tails.get(tails.size()-1).getY();
 
         //Move Tails
         if(tails.size() >=2){
@@ -86,6 +77,7 @@ public class Snake
                 tails.get(0).setY(head.getY());
             }
         }
+
         //Move Head
         switch(head.getDir()){
             case RIGHT:
@@ -102,6 +94,7 @@ public class Snake
                 break;
 
         }
+
     }
 
     public  boolean collideWall(){
@@ -116,6 +109,8 @@ public class Snake
             addTail();
             Scoreboard.scores.set(ID,Scoreboard.scores.get(ID)+1);
             if(Scoreboard.scores.get(ID) > Scoreboard.bestscore) Scoreboard.bestscore = Scoreboard.scores.get(ID);
+
+            GameClock.pickup.onEaten();
 
             GameClock.createPickup();
         }

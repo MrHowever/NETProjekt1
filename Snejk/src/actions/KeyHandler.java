@@ -58,8 +58,12 @@ public class KeyHandler implements KeyListener
                     }
                 }
                 break;
-            case KeyEvent.VK_J:
+            case KeyEvent.VK_1:
                 GameClock.snakes.get(0).aiContrrolled = !GameClock.snakes.get(0).aiContrrolled;
+                break;
+            case KeyEvent.VK_2:
+                if(GameClock.snakes.size() > 1)
+                    GameClock.snakes.get(1).aiContrrolled = !GameClock.snakes.get(1).aiContrrolled;
                 break;
             case KeyEvent.VK_LEFT:
                 if(GameClock.snakes.size() > 1) {

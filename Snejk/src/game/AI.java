@@ -58,10 +58,19 @@ public class AI
         }
 
         //0 means the cell is blocked by an obstacle
-
         for(int i = 0; i < GameClock.obstacle.segments.size(); i++)
         {
             grid[GameClock.obstacle.segments.get(i).getX()][GameClock.obstacle.segments.get(i).getY()] = 0;
+        }
+
+        for(Snake snakerino : GameClock.snakes)
+        {
+            for(int i = 0; i < snakerino.tails.size(); i++) {
+                grid[snakerino.tails.get(i).getX()][snakerino.tails.get(i).getY()] = 0;
+            }
+
+            if(snakerino != snake)
+                grid[snakerino.head.getX()][snakerino.head.getY()] = 0;
         }
 
         destinationX = GameClock.pickup.getX();
@@ -79,12 +88,12 @@ public class AI
         return true;
     }
 
-    boolean isBlocked(int x, int y)
+    boolean isUnBlocked(int x, int y)
     {
         if(grid[x][y] == 1)
-            return false;
+            return true;
 
-        return true;
+        return false;
     }
 
     boolean isDestination(int x, int y)
@@ -106,7 +115,6 @@ public class AI
 
         while(!(cells[col][row].parentX == col && cells[col][row].parentY == row))
         {
-//            System.out.println("Node ("+col+","+row+"), Parent = ("+cells[col][row].parentX+","+cells[col][row].parentY+")");
 
             path.push(new Pair(col,row));
 
@@ -117,10 +125,8 @@ public class AI
             col = wtf;
         }
 
-        return path.peek();
+        Pair valRet =  path.peek();
 
-        /*
-        System.out.println("Node ("+col+","+row+"), Parent = ("+cells[col][row].parentX+","+cells[col][row].parentY+")");
         path.push(new Pair(col,row));
 
 
@@ -128,10 +134,9 @@ public class AI
         {
             Pair tempPair = path.peek();
             path.pop();
-            System.out.println(tempPair.x + ", " + tempPair.y);
         }
-        */
 
+        return valRet;
     }
 
     public Pair aiMove(Pair position)
@@ -141,8 +146,6 @@ public class AI
 
     public Pair AStar()
     {
-        System.out.println("Start: "+startX + ", "+startY);
-        System.out.println("Dest: "+destinationX + ", "+destinationY);
 
         if(!isValid(startX,startY) || !isValid(destinationX,destinationY))
         {
@@ -150,10 +153,18 @@ public class AI
             return new Pair(-1,-1);
         }
 
-        if(isBlocked(startX,startY) || isBlocked(destinationX,destinationY))
+        if(isUnBlocked(startX,startY) == false || isUnBlocked(destinationX,destinationY) == false)
         {
             System.out.println("No path available");
-            return new Pair(-1,-1);
+
+            if(isValid(startX+1,startY) && isUnBlocked(startX+1,startY))
+                return new Pair(startX+1,startY);
+            if(isValid(startX-1,startY) && isUnBlocked(startX-1,startY))
+                return new Pair(startX-1,startY);
+            if(isValid(startX,startY+1) && isUnBlocked(startX,startY+1))
+                return new Pair(startX,startY+1);
+            if(isValid(startX,startY-1) && isUnBlocked(startX,startY-1))
+                return new Pair(startX,startY-1);
         }
 
         if(startX == destinationX && startY == destinationY)
@@ -210,27 +221,19 @@ public class AI
 
             int[] xCombinations = new int[]{
                                             x-1,
-                                            x-1,
-                                            x-1,
-                                            x,
-                                            x,
                                             x+1,
-                                            x+1,
-                                            x+1};
+                                            x,
+                                            x};
 
             int[] yCombinations = new int[]{
-                                            y-1,
+                                            y,
                                             y,
                                             y+1,
-                                            y-1,
-                                            y+1,
-                                            y-1,
-                                            y,
-                                            y+1};
+                                            y-1};
 
             int tempX, tempY;
 
-            for(int i = 0; i < 8; i++) {
+            for(int i = 0; i < 4; i++) {
                 tempX = xCombinations[i];
                 tempY = yCombinations[i];
 
@@ -238,10 +241,9 @@ public class AI
                     if (isDestination(tempX,tempY)) {
                         cellDetails[tempX][tempY].parentX = x;
                         cellDetails[tempX][tempY].parentY = y;
-                        System.out.println("Found destination node");
-                        destinationReached = true;
+                         destinationReached = true;
                         return tracePath(cellDetails);
-                    } else if (closedList[tempX][tempY] == false && !isBlocked(tempX,tempY)) {
+                    } else if (closedList[tempX][tempY] == false && isUnBlocked(tempX,tempY) == true) {
                         gNew = cellDetails[x][y].g + 1.0;
                         hNew = HValue(tempX,tempY);
                         fNew = gNew + hNew;

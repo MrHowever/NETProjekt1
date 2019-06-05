@@ -5,6 +5,9 @@ public class Berries extends PickUp
     public Berries()
     {
         randomEdgePosition();
+
+        while(checkIfCollided())
+            randomEdgePosition();
     }
 
     public void reset()

@@ -3,6 +3,12 @@ package game;
 public class Frog extends PickUp
 {
     boolean jump = true;
+
+    public Frog()
+    {
+        super();
+    }
+
     public void action()
     {
         if(jump) {
