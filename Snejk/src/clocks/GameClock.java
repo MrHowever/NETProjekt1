@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class GameClock extends Thread
 {
     public static boolean running = true;
-    public static int sleepTime = 100;
+    public static int sleepTime = 500;
     public static ArrayList<Snake> snakes = new ArrayList<Snake>(Arrays.asList(new Snake(0)));
     public static Obstacle obstacle = new BlinkingObstacle();
     public static PickUp pickup = new SpeedUp();

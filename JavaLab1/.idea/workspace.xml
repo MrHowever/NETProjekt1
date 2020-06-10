@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99157dbb-90ad-46f9-9121-439192949ace" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Snejk/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Snejk/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Snejk/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Snejk/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Snejk/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Snejk/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Snejk/src/clocks/GameClock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Snejk/src/clocks/GameClock.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -86,6 +84,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/varabi-filmweb-api-d900e053d9c7" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -130,16 +129,19 @@
       <updated>1559080041499</updated>
       <workItem from="1559080050846" duration="4638000" />
       <workItem from="1559594459072" duration="85000" />
+      <workItem from="1559814082192" duration="200000" />
+      <workItem from="1559814916838" duration="120000" />
+      <workItem from="1561491447743" duration="48000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4723000" />
+    <option name="totallyTimeSpent" value="5091000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24980047" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26177174" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
